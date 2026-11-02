@@ -1,0 +1,16 @@
+{
+  "name": "index-weave-quality",
+  "private": true,
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "links": "markdown-link-check README.md && markdown-link-check docs/STORAGE.md && markdown-link-check docs/SECURITY.md"
+  },
+  "devDependencies": {
+    "prettier": "3.9.10",
+    "markdown-link-check": "3.15.0"
+  }
+}

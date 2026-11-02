@@ -1,0 +1,49 @@
+# Security and filesystem boundaries
+
+This package is a local POSIX storage engine. It does not expose a network
+listener, load a model, fetch document URLs or upload content. Its Python API is
+a trusted programming interface, not a sandbox for arbitrary objects or user
+code. Supported platforms need directory-relative opens, no-follow flags and
+functioning local file locks/synchronization. Windows and network filesystems
+are outside this version's support; OS APIs alone do not certify every POSIX
+filesystem.
+
+Use a directory owned by the current user under a trusted parent. The engine
+refuses public group/other permissions, final-component symlinks, unexpected
+entries, nonregular files and hard-linked workspace files. These checks are not
+protection against a privileged administrator, a hostile same-user process,
+writable ancestors or every filesystem race. Advisory locks work only when
+participating processes honour them. Do not edit, replace or truncate workspace
+files behind an open writer.
+
+All document versions, including deleted text, remain as plaintext in the log.
+Deletion removes a live record and does not securely erase earlier bytes.
+Titles, tags, IDs, snapshots, command output and backups can also reveal private
+information. There is no application encryption, credential store, tenant
+boundary, recovery escrow or durable remote backup. Only the suggested
+`collections/` directory is ignored by Git; this is not a scanner that prevents
+committing private files elsewhere.
+
+The CLI accepts bounded regular UTF-8 text files and refuses final-component
+input symlinks and special files. It never executes or renders document text.
+Store errors include fixed operational messages rather than document contents.
+Get deliberately prints content; redirect or share it only when appropriate. A
+checksum and a caller's expected revision do not authenticate the origin of a
+file or document.
+
+A failed new-store initialization can leave a partial private directory.
+Existing paths are never automatically reset, removed or reused. An incomplete
+append is not silently truncated; explicit matching-token repair may discard
+unacknowledged changes. Complete corruption is refused. Preserve the original
+before deciding to repair, and do not copy a live workspace during writes and
+assume it is a consistent backup. This version has no online backup or
+compaction API.
+
+Pinned libraries provide advisory locking and development tooling. The versioned
+log format, state transitions, capacity checks and recovery decisions are
+custom. Hypothesis supplies generated operation sequences for a
+dictionary-oracle test; see its
+[stateful testing guidance](https://hypothesis.readthedocs.io/en/latest/stateful.html).
+Tests use synthetic data and private temporary workspaces. No real-user
+documents, credentials, public deployment, formal security review or power-loss
+certification are claimed.

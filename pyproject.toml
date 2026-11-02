@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools==84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "index-weave"
+version = "0.1.0"
+description = "Revisioned document storage for IndexWeave"
+requires-python = ">=3.12"
+dependencies = ["portalocker==4.4.2"]
+
+[project.scripts]
+indexweave = "indexweave.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

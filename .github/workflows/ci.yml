@@ -1,0 +1,66 @@
+name: Verify
+on: [push, pull_request]
+permissions:
+  contents: read
+defaults:
+  run:
+    shell: bash
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - run: pip install -r requirements-dev.txt
+      - run: npm ci --ignore-scripts
+      - run: ruff check . && ruff format --check .
+      - run: npm run format:check
+      - run: npm run links
+  storage:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python: "3.12"
+          - os: ubuntu-latest
+            python: "3.13"
+          - os: ubuntu-latest
+            python: "3.14"
+          - os: macos-latest
+            python: "3.12"
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install -r requirements-dev.txt
+      - run: python -m build --wheel --no-isolation
+      - run: pip install --force-reinstall --no-deps dist/*.whl
+      - run: pip check
+      - run: python -m unittest discover -s tests -v
+      - run: indexweave --version
+      - name: Run the synthetic storage example
+        run: |
+          mkdir -p artifacts
+          python examples/storage_demo.py > artifacts/storage-demo.json
+          python - <<'PY'
+          from pathlib import Path
+          print("STORAGE_DEMO=" + Path("artifacts/storage-demo.json").read_text().strip())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: storage-${{ matrix.os }}-${{ matrix.python }}
+          path: |
+            artifacts/storage-demo.json
+            dist/*.whl
+          retention-days: 7
