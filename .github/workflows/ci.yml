@@ -54,8 +54,12 @@ jobs:
           mkdir -p artifacts
           python examples/storage_demo.py > artifacts/storage-demo.json
           python - <<'PY'
+          import json
           from pathlib import Path
-          print("STORAGE_DEMO=" + Path("artifacts/storage-demo.json").read_text().strip())
+          actual = json.loads(Path("artifacts/storage-demo.json").read_text())
+          recorded = json.loads(Path("examples/storage-demo.json").read_text())["result"]
+          assert actual == recorded, "Synthetic storage output differs from the recorded format fixture"
+          print("STORAGE_DEMO=" + json.dumps(actual, sort_keys=True))
           PY
       - uses: actions/upload-artifact@v4
         with:

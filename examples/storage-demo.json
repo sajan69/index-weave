@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "source": {
+    "execution_kind": "github_actions",
+    "commit_sha": "7f1080a0ef90ec509db7a0f84da276f42d3a025a",
+    "run_url": "https://github.com/sajan69/index-weave/actions/runs/41508679734",
+    "job_id": 125494503226,
+    "runner": "ubuntu-latest",
+    "python_series": "3.12"
+  },
+  "result": {
+    "completed": true,
+    "final_documents": 1,
+    "final_revision": 2,
+    "initial_documents": 2,
+    "initial_revision": 1,
+    "injected_tail_bytes": 70,
+    "prior_snapshot_unchanged": true,
+    "remaining_ids": ["guide"],
+    "repaired_log_bytes": 554,
+    "repaired_log_sha256": "2ce6cdbe7155faa4d6c65b2f15539cdb0c151962673faa3bf051523c6eed0556",
+    "strict_reader_refused_tail": true,
+    "workload": "synthetic-storage-roundtrip-v1"
+  }
+}

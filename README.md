@@ -89,11 +89,13 @@ Tests include a reference state machine, frame truncation/corruption cases,
 short writes, synchronization failures, abrupt child-process exits,
 separate-process locks, capacity boundaries and installed CLI operations.
 Formatting uses Ruff for Python and Prettier for supported
-documentation/configuration files. Portalocker supplies advisory locks; the log
-codec and storage semantics are custom.
+documentation/configuration files. Ruff excludes Markdown to keep one formatter
+responsible for those files. Portalocker supplies advisory locks; the log codec
+and storage semantics are custom.
 
 Document bytes are stored as plaintext. Private file modes and checksums do not
 provide encryption, authentication or universal power-loss protection. Read the
-[security and filesystem boundaries](docs/SECURITY.md). Demonstrations are
+[security and filesystem boundaries](docs/SECURITY.md) and
+[storage verification evidence](docs/EVALUATION.md). Demonstrations are
 synthetic; no production adoption, storage certification or AI retrieval results
 are claimed.
