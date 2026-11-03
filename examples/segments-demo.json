@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "source": {
+    "execution_kind": "github_actions",
+    "commit": "5ee0fc0fded27afa6e97fb44471e877a070de582",
+    "run_id": 41595935577,
+    "job_id": 125783180783,
+    "runner": "ubuntu-latest",
+    "python_series": "3.12",
+    "scope": "synthetic derived-segment lifecycle; not source-log compaction or a performance benchmark"
+  },
+  "result": {
+    "after_compaction_referenced_bytes": 1233,
+    "before_compaction_referenced_bytes": 2308,
+    "completed": true,
+    "generations": [1, 2, 3],
+    "index": {
+      "analyzer": "unicode-nfc-casefold-v1",
+      "b": 0.75,
+      "content_sha256": "2f1725992375c36c10d81cbae1f63348803568c5deabf501d6bbda7ec868b9df",
+      "distinct_terms": 11,
+      "document_count": 2,
+      "k1": 1.2,
+      "normalization_unicode_version": "15.0.0",
+      "query_language": "required-clauses-v1",
+      "regex_version": "2026.9.29",
+      "scoring": "bm25-positive-idf-v1",
+      "snapshot_revision": 2,
+      "token_occurrences": 14
+    },
+    "old_view_preserved": true,
+    "remaining_ids": ["a", "c"],
+    "removed_files": 2,
+    "search_matches_rebuilt_oracle": true,
+    "segment_counts": [1, 2, 1],
+    "source_log_unchanged": true,
+    "source_revision": 2,
+    "stale_refused": true,
+    "workload": "synthetic-segment-lifecycle-v1"
+  }
+}

@@ -1,4 +1,4 @@
-# Storage and lexical verification
+# Engine verification
 
 The installed storage package was exercised with synthetic documents, private
 local temporary workspaces and controlled failure injection. This evaluates the
@@ -93,10 +93,10 @@ network filesystems, every possible corruption or interleaving, hostile host
 administrators, production workloads or Windows support. Checksums cannot detect
 removal of a complete valid suffix without external evidence. Deleted text
 remains in the append log. The storage-only run did not exercise lexical
-retrieval; those checks are described below. There is no compaction, semantic
-model, HTTP server or browser workflow in either result set. No retrieval
-accuracy, speedup, production adoption, physical durability certification or
-business impact is claimed.
+retrieval; those checks are described below. Neither of those two source runs
+exercised derived-segment compaction, a semantic model, an HTTP server or a
+browser workflow. No retrieval accuracy, speedup, production adoption, physical
+durability certification or business impact is claimed.
 
 ## Lexical search correctness
 
@@ -178,3 +178,95 @@ representative scale results in this evidence. That lexical-only run built the
 in-memory index from a strict storage snapshot; it did not exercise persisted
 segments, an HTTP API or a browser workflow. See [search semantics](SEARCH.md)
 for the exact query, scoring, resource and source-offset contracts.
+
+## Persistent segment verification
+
+The persistent implementation at
+[`5ee0fc0fded27afa6e97fb44471e877a070de582`](https://github.com/sajan69/index-weave/commit/5ee0fc0fded27afa6e97fb44471e877a070de582)
+was exercised in
+[CI run 41595935577](https://github.com/sajan69/index-weave/actions/runs/41595935577)
+on 3 November 2026. All five jobs passed: quality checks and installed wheels on
+Ubuntu with CPython 3.12, 3.13 and 3.14, and macOS with CPython 3.12. Each wheel
+passed 72 methods: 52 storage/lexical methods and 20 segment methods. These are
+72 test designs repeated across four environments, not 288 distinct designs. The
+quality job passed Ruff lint/format for 27 Python files, Prettier and 23 links
+without treating network errors as success. The wheel contains thirteen Python
+modules. No new runtime dependency was added for segment persistence.
+
+The segment methods exercise persisted posting loads with the tokenizer patched
+to fail, incremental analysis of only two changed documents, replacement and
+tombstone filtering, compaction and cleanup, old in-memory view stability,
+source-log byte equality and the source revision/CAS boundary after compaction.
+They also cover generation conflicts, rollback and same-revision content
+mismatch, idempotent operations, complete corruption refusal, every truncated
+prefix of a small manifest, checksum-valid invalid postings and source offsets,
+duplicate/noncanonical/nonfinite/deep JSON, runtime provenance mismatch,
+private-file and path guards, existing-directory preservation and reduced-budget
+refusal. The reduced budgets test guards; they are not full-capacity load tests.
+
+Failure injection covers partial segment writes, each of four publication sync
+boundaries and namespace replacement failure. The expected active generation is
+checked after each failure. Before replacement, reads use the old manifest;
+after replacement and a failed final directory sync, the new manifest can be
+visible despite `CommitUnknown`. Explicit cleanup removes abandoned files only
+when the active chain validates. Corrupt active data is never bypassed by
+selecting an earlier generation.
+
+Real subprocess tests exit with code 31 immediately before manifest replacement
+or receive SIGKILL immediately after the actual replacement. Additional child
+processes hold shared reader gates or exclusive writer/gate leases. Compaction,
+cleanup and conflicting readers/writers are refused while those locks require
+it. Two refresh processes released from a barrier produce exactly one published
+generation and one refused attempt. These tests demonstrate those interleavings
+and process-exit outcomes, not all possible schedules or physical power loss.
+
+A Hypothesis reference test caps generation at 20 examples of 1–12 document
+changes, with periodic compaction and cleanup. After each refresh it compares
+search results to an independently rebuilt in-memory lexical index. That
+reference already has the separate linear-scan/scoring checks described above.
+The segment test does not treat its own serialized bytes as a relevance oracle.
+
+### Worked persistent collection
+
+[The recorded result](../examples/segments-demo.json) is the decoded result of
+Ubuntu CPython 3.12 job `125783180783` in that successful source run. Reproduce
+it with `python examples/segments_demo.py`. The script uses a new temporary
+source workspace and a separate temporary derived index, both containing only
+fictional text. It creates two documents, replaces one, deletes one and adds
+another, then refreshes, compacts, vacuums and reopens the index.
+
+| Observation                                     | Actual result |
+| ----------------------------------------------- | ------------- |
+| Index generations                               | 1 → 2 → 3     |
+| Referenced segments                             | 1 → 2 → 1     |
+| Source revision after refresh and compaction    | 2             |
+| Referenced segment file bytes before compaction | 2,308         |
+| Referenced segment file bytes after compaction  | 1,233         |
+| Unreferenced files removed by explicit vacuum   | 2             |
+| Remaining IDs                                   | `a`, `c`      |
+| Live token occurrences / distinct terms         | 14 / 11       |
+
+Byte counts sum complete referenced segment files, including their framing and
+checksums. They exclude the manifest, lock files, unreferenced files, filesystem
+allocation units, process memory and the source log. They are deterministic
+observations for this tiny JSON-format fixture, not an average compression
+ratio, storage-capacity estimate or latency/throughput improvement. All four
+source-run environments produced these counts and the final live-content digest:
+
+```text
+2f1725992375c36c10d81cbae1f63348803568c5deabf501d6bbda7ec868b9df
+```
+
+The script verifies stale-generation refusal, equality with a rebuilt search
+oracle, retained old-view results and byte-for-byte unchanged source-log data.
+The recorded CPython 3.12 normalization Unicode version is 15.0.0; the 3.13 and
+3.14 jobs recorded 15.1.0 and 16.0.0. Every job built its own compatible index.
+The result does not show cross-version reuse of the same index files; the format
+intentionally refuses mismatched analyzer provenance.
+
+The local CPython 3.12.14 installed wheel separately passed all 72 methods and
+completed the same example. There are no hardware power-loss tests, source-log
+compaction results, representative scale measurements, relevance-labelled
+semantic/hybrid results or end-user browser workflows in this evidence.
+[Persistent index semantics](SEGMENTS.md) states the publication, cleanup,
+source-snapshot and filesystem limits.
