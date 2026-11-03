@@ -1,4 +1,4 @@
-# Storage verification
+# Storage and lexical verification
 
 The installed storage package was exercised with synthetic documents, private
 local temporary workspaces and controlled failure injection. This evaluates the
@@ -92,7 +92,89 @@ They do not simulate hardware power removal, dishonest flush acknowledgements,
 network filesystems, every possible corruption or interleaving, hostile host
 administrators, production workloads or Windows support. Checksums cannot detect
 removal of a complete valid suffix without external evidence. Deleted text
-remains in the append log. There is no compaction, lexical index, semantic
-model, HTTP server or browser workflow in these results. No retrieval accuracy,
-speedup, production adoption, physical durability certification or business
-impact is claimed.
+remains in the append log. The storage-only run did not exercise lexical
+retrieval; those checks are described below. There is no compaction, semantic
+model, HTTP server or browser workflow in either result set. No retrieval
+accuracy, speedup, production adoption, physical durability certification or
+business impact is claimed.
+
+## Lexical search correctness
+
+The lexical implementation at
+[`fb24f14bd134a6b17c3f6ef846ac17772b3eec22`](https://github.com/sajan69/index-weave/commit/fb24f14bd134a6b17c3f6ef846ac17772b3eec22)
+was verified by
+[CI run 41557070029](https://github.com/sajan69/index-weave/actions/runs/41557070029)
+on 3 November 2026. All five jobs passed: quality checks and installed-wheel
+checks on Ubuntu with CPython 3.12, 3.13 and 3.14, and macOS with CPython 3.12.
+Each wheel ran 52 test methods: the 40 storage methods above and 12 lexical
+methods. Repeating the methods across environments does not make them 208
+different test designs. The quality job passed Ruff lint/format, Prettier and 13
+documentation links, including external references without suppressed errors.
+
+The 12 lexical methods cover:
+
+- Unicode normalization with original offsets, fixed-pattern tokenization and
+  source/token limits, and bounded query grammar rejection.
+- Required terms and tags, repeated-term phrases, within-field adjacency and
+  prevention of title/body phrase joins.
+- A three-document hand calculation of positive-IDF BM25, including a token-free
+  document and unchanged corpus statistics after filtering.
+- Source spans, plain-text passages, replacement/deletion after reopening, old
+  snapshot stability, immutable nested postings, total counts before limits and
+  deterministic ties.
+- Index-budget guards using reduced constants, invalid result limits and an
+  installed CLI search that leaves the log bytes unchanged.
+- A linear-scan reference for phrase/term/tag matches and independently computed
+  document statistics/scores on Hypothesis-generated ASCII word corpora. The
+  test settings cap generation at 60 examples, each containing 1–12 documents
+  with 1–12 words. Four fixed query forms exercise that corpus. This is not a
+  representative language benchmark or a relevance-labelled dataset.
+
+The reduced-budget tests exercise refusal without constructing a million-token
+fixture. The tokenizer test does construct the 32,768-token field boundary.
+Neither case establishes a production memory or latency limit. The local CPython
+3.12.14 installed wheel also passed all 52 methods; local execution and CI are
+separate runs. The package contains ten Python modules, including the three
+lexical modules. No editable-install-only result is used as package proof.
+
+### Worked fictional collection
+
+[The recorded summary](../examples/search-demo.json) comes from the successful
+Ubuntu CPython 3.12 job `125658431506` in that source run. The full JSON output
+is reproducible with `python examples/search_demo.py`; CI retains it alongside
+the wheel as a seven-day artifact. The example creates only a fresh temporary
+workspace with four fictional notes, then replaces one and deletes another.
+
+| Query at revision 1         | Returned IDs in order |
+| --------------------------- | --------------------- |
+| `"write ahead" tag:storage` | `journal`             |
+| `"phrase search"`           | `index`               |
+| `recovery`                  | `draft`, `journal`    |
+| `tag:storage`               | `draft`, `journal`    |
+
+Revision 1 contains four documents, 35 token occurrences and 29 distinct terms.
+After replacing `journal` and deleting `draft`, revision 2 contains three
+documents, 26 occurrences and 23 distinct terms. A new search for `recovery`
+returns no matches, while the retained revision-1 index still returns two. The
+new query `durable` returns the updated `journal`. These are explicit mechanical
+expectations for authored text, not human assessments of useful relevance.
+
+The canonical live-content digests are:
+
+```text
+revision 1: 86a6e4b5fcbacff0f7a1be7a7bbe0edd099b38b82122c3acba8ecdc243d28c78
+revision 2: c6b9a62ed48b95a182cc557529e3f0399bd4003870e8dfb62f0d6270f2f9f650
+```
+
+All four source-run environments produced those digests and result IDs. Their
+recorded Python normalization Unicode versions differed: 15.0.0 on Python 3.12,
+15.1.0 on 3.13 and 16.0.0 on 3.14. Agreement on this fictional text does not
+prove cross-version agreement for every Unicode input. The pinned `regex`
+version was 2026.9.29 throughout.
+
+There are no held-out relevance judgments, Recall@k/nDCG@k results, semantic or
+hybrid retrieval results, model provenance, search latency measurements or
+representative scale results in this evidence. The in-memory index rebuilds from
+a strict storage snapshot; persisted segments, an HTTP API and a browser
+workflow are not present. See [search semantics](SEARCH.md) for the exact query,
+scoring, resource and source-offset contracts.

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "source": {
+    "execution_kind": "github_actions",
+    "commit": "fb24f14bd134a6b17c3f6ef846ac17772b3eec22",
+    "run_id": 41557070029,
+    "job_id": 125658431506,
+    "runner": "ubuntu-latest",
+    "python_series": "3.12",
+    "scope": "synthetic lexical lifecycle summary; not relevance judgments"
+  },
+  "result": {
+    "completed": true,
+    "current_index": {
+      "analyzer": "unicode-nfc-casefold-v1",
+      "b": 0.75,
+      "content_sha256": "c6b9a62ed48b95a182cc557529e3f0399bd4003870e8dfb62f0d6270f2f9f650",
+      "distinct_terms": 23,
+      "document_count": 3,
+      "k1": 1.2,
+      "normalization_unicode_version": "15.0.0",
+      "query_language": "required-clauses-v1",
+      "regex_version": "2026.9.29",
+      "scoring": "bm25-positive-idf-v1",
+      "snapshot_revision": 2,
+      "token_occurrences": 26
+    },
+    "initial_index": {
+      "analyzer": "unicode-nfc-casefold-v1",
+      "b": 0.75,
+      "content_sha256": "86a6e4b5fcbacff0f7a1be7a7bbe0edd099b38b82122c3acba8ecdc243d28c78",
+      "distinct_terms": 29,
+      "document_count": 4,
+      "k1": 1.2,
+      "normalization_unicode_version": "15.0.0",
+      "query_language": "required-clauses-v1",
+      "regex_version": "2026.9.29",
+      "scoring": "bm25-positive-idf-v1",
+      "snapshot_revision": 1,
+      "token_occurrences": 35
+    },
+    "queries": [
+      {
+        "ids": ["journal"],
+        "query": "\"write ahead\" tag:storage"
+      },
+      {
+        "ids": ["index"],
+        "query": "\"phrase search\""
+      },
+      {
+        "ids": ["draft", "journal"],
+        "query": "recovery"
+      },
+      {
+        "ids": ["draft", "journal"],
+        "query": "tag:storage"
+      }
+    ]
+  }
+}
