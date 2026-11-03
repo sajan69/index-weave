@@ -108,7 +108,7 @@ from this bounded experiment.
 ## Mechanical validation
 
 `indexweave.retrieval_data` implements the deterministic row selection,
-paragraph projection, source offsets through original sentence preservation,
+paragraph projection and original sentence preservation,
 binary metrics and fixed fusion rule without network access or model inference.
 Its synthetic tests exercise hand-calculated metrics, full relevance
 denominators, ID-only selection, distractor retention, ambiguous titles,
@@ -116,4 +116,7 @@ malformed annotations and storage bounds. These tests are correctness checks,
 not retrieval-quality results. `scripts/audit_retrieval_sources.py` audits fixed
 public metadata and allowlisted model configurations in CI; it does not download
 weights or run a model. The audit artifact distinguishes declared licences and
-asset digests from verified downloaded bytes.
+asset digests from verified downloaded bytes. The audited module allowlist contains the maintained
+Transformer, Pooling and optional
+[Normalize](https://www.sbert.net/docs/package_reference/sentence_transformer/modules.html)
+components; no repository-defined Python modules are accepted.

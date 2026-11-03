@@ -54,7 +54,7 @@ class SourceAuditTests(unittest.TestCase):
             return {
                 "sha": "a" * 40,
                 "cardData": {
-                    "license": "cc-by-sa-4.0" if kind == "datasets" else "apache-2.0"
+                    "license": ["cc-by-sa-4.0"] if kind == "datasets" else "apache-2.0"
                 },
             }
 
@@ -73,6 +73,10 @@ class SourceAuditTests(unittest.TestCase):
         ):
             result = audit.run()
             self.assertTrue(result["completed"])
+            configurations["modules.json"].append(
+                {"type": "sentence_transformers.models.Normalize"}
+            )
+            self.assertTrue(audit.run()["completed"])
             self.assertEqual(result["dataset"]["revision"], "a" * 40)
             configurations["config.json"]["auto_map"] = {"AutoModel": "custom.Code"}
             with self.assertRaises(ValueError):

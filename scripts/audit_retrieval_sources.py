@@ -92,11 +92,15 @@ def run():
             "value": json.loads(raw),
         }
     types = [entry["type"] for entry in reviewed["modules.json"]["value"]]
-    if types != [
+    base_types = [
         "sentence_transformers.models.Transformer",
         "sentence_transformers.models.Pooling",
-    ]:
-        raise ValueError("Unreviewed model modules")
+    ]
+    if types not in (
+        base_types,
+        [*base_types, "sentence_transformers.models.Normalize"],
+    ):
+        raise ValueError(f"Unreviewed model modules: {types!r}")
     config = reviewed["config.json"]["value"]
     if config.get("model_type") != "bert" or config.get("auto_map"):
         raise ValueError("Unreviewed model architecture or custom code")
