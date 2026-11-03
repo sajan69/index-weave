@@ -2,9 +2,11 @@
 
 `indexweave search WORKSPACE --query '"write ahead" tag:storage' --limit 10`
 loads a strict storage snapshot, builds a positional index in memory and returns
-JSON. It writes no index files and makes no network requests. Each CLI
-invocation replays the log and rebuilds the index. A corrupt or incomplete
-storage log is refused under the existing [storage contract](STORAGE.md).
+JSON. With `--index DIRECTORY`, it instead loads a matching persisted generation
+from a separate derived directory. Either search mode writes no index files and
+makes no network requests. Each CLI invocation replays the source log; only the
+default in-memory mode rebuilds postings. A corrupt or incomplete storage log is
+refused under the existing [storage contract](STORAGE.md).
 
 ```python
 from indexweave import LexicalIndex, read_snapshot
@@ -17,7 +19,8 @@ An index copies the snapshot's record mapping and freezes its tokens, postings
 and tag sets. Later writes do not change it. Build another index from a fresh
 snapshot to search new content. Deleted documents and replaced terms are absent
 from that new index; the old index remains a deliberately older search view.
-There is no background refresh, persistent segment format or compaction here.
+There is no background refresh. [Persistent index operations](SEGMENTS.md)
+provide explicit creation, incremental refresh and derived-segment compaction.
 
 ## Query language
 

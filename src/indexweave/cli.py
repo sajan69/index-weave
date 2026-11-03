@@ -11,9 +11,15 @@ from . import (
     Put,
     Writer,
     __version__,
+    compact_index,
+    create_index,
     inspect,
+    inspect_index,
+    load_index,
     read_snapshot,
+    refresh_index,
     repair_tail,
+    vacuum_index,
 )
 from .errors import MissingDocument, StoreError
 from .files import require_platform
@@ -50,9 +56,18 @@ def parser():
         "delete",
         "repair-tail",
         "search",
+        "index-create",
+        "index-refresh",
+        "index-inspect",
+        "index-compact",
+        "index-vacuum",
     ]:
         child = commands.add_parser(command)
         child.add_argument("workspace")
+        if command in {"search", "index-create", "index-refresh"}:
+            child.add_argument("--index", required=command != "search")
+        if command in {"index-refresh", "index-compact", "index-vacuum"}:
+            child.add_argument("--expected-generation", type=int, required=True)
         if command == "search":
             child.add_argument("--query", required=True)
             child.add_argument(
@@ -85,6 +100,16 @@ def execute(args):
     if args.command == "create":
         with Writer.create(args.workspace) as writer:
             return {"revision": writer.snapshot().revision, "document_count": 0}
+    if args.command == "index-inspect":
+        return inspect_index(args.workspace)
+    if args.command == "index-compact":
+        return compact_index(
+            args.workspace, expected_generation=args.expected_generation
+        )
+    if args.command == "index-vacuum":
+        return vacuum_index(
+            args.workspace, expected_generation=args.expected_generation
+        )
     if args.command == "inspect":
         return inspect(args.workspace).to_dict()
     if args.command == "repair-tail":
@@ -108,8 +133,19 @@ def execute(args):
                 "document_count": len(snapshot.documents),
             }
     snapshot = read_snapshot(args.workspace)
+    if args.command == "index-create":
+        return create_index(args.index, snapshot)
+    if args.command == "index-refresh":
+        return refresh_index(
+            args.index, snapshot, expected_generation=args.expected_generation
+        )
     if args.command == "search":
-        return LexicalIndex.from_snapshot(snapshot).search(args.query, limit=args.limit)
+        index = (
+            load_index(args.index, expected_snapshot=snapshot)
+            if args.index
+            else LexicalIndex.from_snapshot(snapshot)
+        )
+        return index.search(args.query, limit=args.limit)
     if args.command == "get":
         record = snapshot.get(args.id)
         if record is None:

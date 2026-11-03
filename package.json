@@ -7,7 +7,7 @@
   "scripts": {
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "links": "markdown-link-check README.md && markdown-link-check docs/STORAGE.md && markdown-link-check docs/SECURITY.md && markdown-link-check docs/EVALUATION.md && markdown-link-check docs/SEARCH.md"
+    "links": "markdown-link-check README.md && markdown-link-check docs/STORAGE.md && markdown-link-check docs/SECURITY.md && markdown-link-check docs/EVALUATION.md && markdown-link-check docs/SEARCH.md && markdown-link-check docs/SEGMENTS.md"
   },
   "devDependencies": {
     "prettier": "3.9.10",

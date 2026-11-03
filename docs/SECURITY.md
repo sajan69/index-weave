@@ -21,8 +21,8 @@ Deletion removes a live record and does not securely erase earlier bytes.
 Titles, tags, IDs, snapshots, command output and backups can also reveal private
 information. There is no application encryption, credential store, tenant
 boundary, recovery escrow or durable remote backup. Only the suggested
-`collections/` directory is ignored by Git; this is not a scanner that prevents
-committing private files elsewhere.
+`collections/` and `indexes/` directories are ignored by Git; this is not a
+scanner that prevents committing private files elsewhere.
 
 The CLI accepts bounded regular UTF-8 text files and refuses final-component
 input symlinks and special files. It never executes or renders document text.
@@ -37,7 +37,8 @@ append is not silently truncated; explicit matching-token repair may discard
 unacknowledged changes. Complete corruption is refused. Preserve the original
 before deciding to repair, and do not copy a live workspace during writes and
 assume it is a consistent backup. This version has no online backup or
-compaction API.
+source-log compaction API. Derived index compaction does not erase source
+history.
 
 Pinned libraries provide advisory locking and development tooling. The versioned
 log format, state transitions, capacity checks and recovery decisions are
@@ -58,3 +59,16 @@ are evidence, not sanitized HTML. No caller-supplied regex or executable query
 is evaluated. Unicode analysis uses the pinned `regex` package (Apache-2.0 AND
 CNRI-Python); this is not a general file-content sanitizer or a security
 certification.
+
+## Derived index directory
+
+[Persistent index operations](SEGMENTS.md) use a separate private directory and
+never migrate or rewrite the version-1 source workspace. Manifests and segments
+contain plaintext copies and metadata. Old segments remain until explicit
+vacuum, which is not secure erasure. The index namespace must contain only its
+managed files; a same-user file deliberately named like an unreferenced segment
+is subject to explicit cleanup. Never use an unrelated directory as an index. A
+corrupt active generation blocks cleanup instead of selecting an older one. A
+failed publication can be visible despite an unsuccessful acknowledgement.
+Runtime provenance mismatches require an explicit new index build, not silent
+re-analysis or authentication bypass.

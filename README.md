@@ -3,8 +3,9 @@
 A document search application with a custom persistent document store. Its
 product scope includes lexical and embedding-based retrieval, an API and a web
 interface. The available package provides revisioned storage and positional
-lexical search through Python and a CLI. It does not yet provide model
-inference, an HTTP server or a web interface.
+lexical search, immutable persisted index segments and derived-index compaction
+through Python and a CLI. It does not yet provide model inference, an HTTP
+server or a web interface.
 
 ## Storage quickstart
 
@@ -68,20 +69,31 @@ assert record.document.text == "A searchable note"
 One writer holds a lifetime lease. Independent readers can obtain immutable
 snapshots between writes; they receive a Busy error while an exclusive write
 gate is held. Whole-log replay is bounded and intentionally simple. There is no
-compaction, persisted index or general-purpose SQL/relational-database
-compatibility in this interface.
+source-log compaction or general-purpose SQL/relational-database compatibility
+in this interface.
 
 ## Search
 
 [Lexical search semantics](docs/SEARCH.md) defines required terms, quoted
 phrases, exact tag filters, Unicode offsets, snapshot consistency and BM25
-ranking. Search rebuilds an in-memory index from a strict snapshot; it does not
-mutate storage. Results include source passages, score contributions and
+ranking. Default search builds an in-memory index; `--index` loads a matching
+persisted generation. Both modes verify a strict source snapshot without
+mutating storage. Results include source passages, score contributions and
 revision provenance. For a temporary fictional collection with search and
 update/delete checks:
 
 ```sh
 .venv/bin/python examples/search_demo.py
+```
+
+## Persistent index
+
+[Persistent index semantics](docs/SEGMENTS.md) covers explicit index creation,
+incremental refresh, stale-snapshot refusal, compaction and cleanup. The index
+lives in a separate directory and preserves the source document log.
+
+```sh
+.venv/bin/python examples/segments_demo.py
 ```
 
 ## Verification

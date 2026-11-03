@@ -41,3 +41,11 @@ class CommitUnknown(StoreError):
 
 class UnusableWriter(StoreError):
     pass
+
+
+class InvalidIndex(StoreError):
+    pass
+
+
+class StaleIndex(Conflict):
+    pass

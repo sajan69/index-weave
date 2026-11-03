@@ -174,7 +174,7 @@ version was 2026.9.29 throughout.
 
 There are no held-out relevance judgments, Recall@k/nDCG@k results, semantic or
 hybrid retrieval results, model provenance, search latency measurements or
-representative scale results in this evidence. The in-memory index rebuilds from
-a strict storage snapshot; persisted segments, an HTTP API and a browser
-workflow are not present. See [search semantics](SEARCH.md) for the exact query,
-scoring, resource and source-offset contracts.
+representative scale results in this evidence. That lexical-only run built the
+in-memory index from a strict storage snapshot; it did not exercise persisted
+segments, an HTTP API or a browser workflow. See [search semantics](SEARCH.md)
+for the exact query, scoring, resource and source-offset contracts.

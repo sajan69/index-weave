@@ -77,11 +77,24 @@ jobs:
               "queries": [{"query": q["query"], "ids": [h["id"] for h in q["hits"]]} for q in result["queries"]],
           }, sort_keys=True))
           PY
+      - name: Run the synthetic persistent segment example
+        run: |
+          python examples/segments_demo.py > artifacts/segments-demo.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result = json.loads(Path("artifacts/segments-demo.json").read_text())
+          assert result["completed"] and result["generations"] == [1, 2, 3]
+          assert result["segment_counts"] == [1, 2, 1]
+          assert result["removed_files"] == 2 and result["source_log_unchanged"]
+          print("SEGMENTS_DEMO=" + json.dumps(result, sort_keys=True))
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: storage-${{ matrix.os }}-${{ matrix.python }}
           path: |
             artifacts/storage-demo.json
             artifacts/search-demo.json
+            artifacts/segments-demo.json
             dist/*.whl
           retention-days: 7
