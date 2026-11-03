@@ -127,12 +127,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - run: pip install . -r requirements-data.txt
+      - run: pip check
       - run: mkdir -p artifacts
       - run:
           python scripts/audit_retrieval_sources.py
           artifacts/retrieval-audit.json
+      - run: python scripts/prepare_retrieval_data.py artifacts/retrieval-data
       - uses: actions/upload-artifact@v4
         with:
           name: retrieval-source-audit
-          path: artifacts/retrieval-audit.json
+          path: |
+            artifacts/retrieval-audit.json
+            artifacts/retrieval-data/summary.json
           retention-days: 7

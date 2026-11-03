@@ -108,15 +108,41 @@ from this bounded experiment.
 ## Mechanical validation
 
 `indexweave.retrieval_data` implements the deterministic row selection,
-paragraph projection and original sentence preservation,
-binary metrics and fixed fusion rule without network access or model inference.
-Its synthetic tests exercise hand-calculated metrics, full relevance
-denominators, ID-only selection, distractor retention, ambiguous titles,
-malformed annotations and storage bounds. These tests are correctness checks,
-not retrieval-quality results. `scripts/audit_retrieval_sources.py` audits fixed
-public metadata and allowlisted model configurations in CI; it does not download
-weights or run a model. The audit artifact distinguishes declared licences and
-asset digests from verified downloaded bytes. The audited module allowlist contains the maintained
+paragraph projection and original sentence preservation, binary metrics and
+fixed fusion rule without network access or model inference. Its synthetic tests
+exercise hand-calculated metrics, full relevance denominators, ID-only
+selection, distractor retention, ambiguous titles, malformed annotations and
+storage bounds. These tests are correctness checks, not retrieval-quality
+results. `scripts/audit_retrieval_sources.py` audits fixed public metadata and
+allowlisted model configurations in CI; it does not download weights or run a
+model. The audit artifact distinguishes declared licences and asset digests from
+verified downloaded bytes. The audited module allowlist contains the maintained
 Transformer, Pooling and optional
 [Normalize](https://www.sbert.net/docs/package_reference/sentence_transformer/modules.html)
 components; no repository-defined Python modules are accepted.
+
+## Public data preparation
+
+The fixed [source record](../examples/retrieval-sources.json) identifies the
+audited distribution and model assets. To acquire and validate the benchmark
+without running a model:
+
+```sh
+.venv/bin/pip install -r requirements-data.txt
+.venv/bin/python scripts/prepare_retrieval_data.py artifacts/retrieval-data
+```
+
+The destination must be new. The script downloads only the pinned public
+validation parquet, verifies its length and SHA-256 before parsing, and excludes
+the answer column. PyArrow supplies the maintained parquet reader. File bytes,
+metadata-declared decompressed bytes, rows and columns are bounded; these are
+not an exact memory sandbox. Selected source units must also fit the document
+store's bounds. Any failed selected annotation aborts preparation.
+
+`corpus.json` contains the derived public text, annotations, source-title links,
+attribution, licence and transformation notice. `summary.json` contains hashes,
+counts and split IDs. Keep attribution with derived data when redistributing it.
+CI retains only the summary and metadata audit, not the corpus. A failed write
+may leave a partial new output directory; it is never reset on retry. Neither
+preparation nor a successful audit is evidence of model inference or retrieval
+quality.

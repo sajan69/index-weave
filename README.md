@@ -106,6 +106,9 @@ The original stays untouched; later writes to the new copy are independent.
 .venv/bin/python examples/compaction_demo.py
 ```
 
+The [retrieval experiment contract](docs/RETRIEVAL.md) defines public-data
+provenance, fixed query splits and evaluation methods.
+
 ## Verification
 
 Use Python 3.12 and Node 24 for development tooling:

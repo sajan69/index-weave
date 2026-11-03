@@ -1,0 +1,2 @@
+# Optional public benchmark ingestion; not required by the storage/search CLI.
+pyarrow==26.0.1

@@ -1,0 +1,158 @@
+{
+  "evidence": {
+    "run": "https://github.com/sajan69/index-weave/actions/runs/41700814907",
+    "job": 126143295129,
+    "commit": "215f86308d0bc5f446407bc5214b2e896584b8ae",
+    "scope": "Successful source-audit job; whole run failed documentation formatting. Metadata and four configuration downloads only; no weights/data acquired."
+  },
+  "result": {
+    "acquired_at": "2026-11-03T19:10:58.691635+00:00",
+    "completed": true,
+    "dataset": {
+      "asset": {
+        "distractor/validation-00000-of-00001.parquet": {
+          "bytes": 27452575,
+          "git_blob": "8df32c2341e895698ebbef0a39a055666c15b201",
+          "lfs_sha256": "c20b638ca82b21d04fe12e14ff417ad05153d4d215a65de54497fca4e972f7c6"
+        }
+      },
+      "distribution": "Hugging Face distribution; not an authenticity certificate",
+      "id": "hotpotqa/hotpot_qa",
+      "license": "CC-BY-SA-4.0",
+      "original_publisher": "https://hotpotqa.github.io/",
+      "revision": "1908d6afbbead072334abe2965f91bd2709910ab"
+    },
+    "model": {
+      "assets": {
+        "1_Pooling/config.json": {
+          "bytes": 190,
+          "git_blob": "d1514c3162bbe87b343f565fadc62e6c06f04f03",
+          "lfs_sha256": null
+        },
+        "README.md": {
+          "bytes": 10502,
+          "git_blob": "44af2e3b0fa3a0b6239e48422972bf755f28fde0",
+          "lfs_sha256": null
+        },
+        "config.json": {
+          "bytes": 612,
+          "git_blob": "72b987fd805cfa2b58c4c8c952b274a11bfd5a00",
+          "lfs_sha256": null
+        },
+        "config_sentence_transformers.json": {
+          "bytes": 116,
+          "git_blob": "fd1b291129c607e5d49799f87cb219b27f98acdf",
+          "lfs_sha256": null
+        },
+        "model.safetensors": {
+          "bytes": 90868376,
+          "git_blob": "d49eff1e4a6f0e3ba5069f21c6d20aad156dd2c9",
+          "lfs_sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db"
+        },
+        "modules.json": {
+          "bytes": 349,
+          "git_blob": "952a9b81c0bfd99800fabf352f69c7ccd46c5e43",
+          "lfs_sha256": null
+        },
+        "sentence_bert_config.json": {
+          "bytes": 53,
+          "git_blob": "59d594003bf59880a884c574bf88ef7555bb0202",
+          "lfs_sha256": null
+        },
+        "special_tokens_map.json": {
+          "bytes": 112,
+          "git_blob": "e7b0375001f109a6b8873d756ad4f7bbb15fbaa5",
+          "lfs_sha256": null
+        },
+        "tokenizer.json": {
+          "bytes": 466247,
+          "git_blob": "cb202bfe2e3c98645018a6d12f182a434c9d3e02",
+          "lfs_sha256": null
+        },
+        "tokenizer_config.json": {
+          "bytes": 350,
+          "git_blob": "c79f2b6a0cea6f4b564fed1938984bace9d30ff0",
+          "lfs_sha256": null
+        },
+        "vocab.txt": {
+          "bytes": 231508,
+          "git_blob": "fb140275c155a9c7c5a3b3e0e77a9e839594a938",
+          "lfs_sha256": null
+        }
+      },
+      "id": "sentence-transformers/all-MiniLM-L6-v2",
+      "license": "Apache-2.0",
+      "reviewed_configuration": {
+        "1_Pooling/config.json": {
+          "sha256": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23",
+          "value": {
+            "pooling_mode_cls_token": false,
+            "pooling_mode_max_tokens": false,
+            "pooling_mode_mean_sqrt_len_tokens": false,
+            "pooling_mode_mean_tokens": true,
+            "word_embedding_dimension": 384
+          }
+        },
+        "config.json": {
+          "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+          "value": {
+            "_name_or_path": "nreimers/MiniLM-L6-H384-uncased",
+            "architectures": [
+              "BertModel"
+            ],
+            "attention_probs_dropout_prob": 0.1,
+            "gradient_checkpointing": false,
+            "hidden_act": "gelu",
+            "hidden_dropout_prob": 0.1,
+            "hidden_size": 384,
+            "initializer_range": 0.02,
+            "intermediate_size": 1536,
+            "layer_norm_eps": 1e-12,
+            "max_position_embeddings": 512,
+            "model_type": "bert",
+            "num_attention_heads": 12,
+            "num_hidden_layers": 6,
+            "pad_token_id": 0,
+            "position_embedding_type": "absolute",
+            "transformers_version": "4.8.2",
+            "type_vocab_size": 2,
+            "use_cache": true,
+            "vocab_size": 30522
+          }
+        },
+        "modules.json": {
+          "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf",
+          "value": [
+            {
+              "idx": 0,
+              "name": "0",
+              "path": "",
+              "type": "sentence_transformers.models.Transformer"
+            },
+            {
+              "idx": 1,
+              "name": "1",
+              "path": "1_Pooling",
+              "type": "sentence_transformers.models.Pooling"
+            },
+            {
+              "idx": 2,
+              "name": "2",
+              "path": "2_Normalize",
+              "type": "sentence_transformers.models.Normalize"
+            }
+          ]
+        },
+        "sentence_bert_config.json": {
+          "sha256": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7",
+          "value": {
+            "do_lower_case": false,
+            "max_seq_length": 256
+          }
+        }
+      },
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+    },
+    "schema_version": 1
+  }
+}
