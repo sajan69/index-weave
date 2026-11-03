@@ -19,6 +19,7 @@ from .model import (
     canonical,
     valid_id,
 )
+from .model import snapshot_digest as digest
 from .query import QUERY_LANGUAGE
 
 SEGMENT_MAGIC = b"IWSEG1\n"
@@ -37,18 +38,6 @@ def require(condition):
 def integer(value, minimum=0, maximum=MAX_REVISION):
     require(type(value) is int and minimum <= value <= maximum)
     return value
-
-
-def digest(snapshot):
-    result = hashlib.sha256()
-    for _, record in sorted(snapshot.documents.items()):
-        result.update(
-            canonical(
-                {"document": record.document.to_dict(), "revision": record.revision}
-            )
-        )
-        result.update(b"\n")
-    return result.hexdigest()
 
 
 def provenance():

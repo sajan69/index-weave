@@ -120,3 +120,11 @@ Primary references checked 3 November 2026:
 [Portalocker](https://portalocker.readthedocs.io/en/latest/). The storage
 contract above describes this implementation, not a claim of the guarantees of
 another database.
+
+## Version-2 checkpoints
+
+The version-1 format above remains supported without automatic migration.
+[Explicit checkpoint compaction](CHECKPOINTS.md) creates a new workspace with a
+version-2 base while preserving revisions; transaction frames after that base
+retain the framing and semantics above. Partial checkpoint bases are not
+repairable transaction tails.

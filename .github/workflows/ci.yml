@@ -89,6 +89,19 @@ jobs:
           assert result["removed_files"] == 2 and result["source_log_unchanged"]
           print("SEGMENTS_DEMO=" + json.dumps(result, sort_keys=True))
           PY
+      - name: Run the source checkpoint compaction example
+        run: |
+          python examples/compaction_demo.py > artifacts/compaction-demo.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result = json.loads(Path("artifacts/compaction-demo.json").read_text())
+          assert result["completed"] and result["source_unchanged"]
+          assert result["compaction"]["revision"] == 7
+          assert result["target_revision_after_append"] == 8
+          assert result["preserved_document_revisions"] == {"guide": 7, "keep": 1}
+          print("COMPACTION_DEMO=" + json.dumps(result, sort_keys=True))
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: storage-${{ matrix.os }}-${{ matrix.python }}
@@ -96,5 +109,6 @@ jobs:
             artifacts/storage-demo.json
             artifacts/search-demo.json
             artifacts/segments-demo.json
+            artifacts/compaction-demo.json
             dist/*.whl
           retention-days: 7

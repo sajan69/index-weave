@@ -265,8 +265,8 @@ The result does not show cross-version reuse of the same index files; the format
 intentionally refuses mismatched analyzer provenance.
 
 The local CPython 3.12.14 installed wheel separately passed all 72 methods and
-completed the same example. There are no hardware power-loss tests, source-log
-compaction results, representative scale measurements, relevance-labelled
-semantic/hybrid results or end-user browser workflows in this evidence.
+completed the same example. That segment-only run did not exercise source-log
+checkpoints, physical power loss, representative scale, relevance-labelled
+semantic/hybrid retrieval or end-user browser workflows.
 [Persistent index semantics](SEGMENTS.md) states the publication, cleanup,
 source-snapshot and filesystem limits.

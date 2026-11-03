@@ -1,3 +1,4 @@
+import hashlib
 import json
 import re
 from collections.abc import Mapping
@@ -125,3 +126,15 @@ class Snapshot:
 
     def get(self, document_id: str) -> Record | None:
         return self.documents.get(valid_id(document_id))
+
+
+def snapshot_digest(snapshot: Snapshot) -> str:
+    result = hashlib.sha256()
+    for _, record in sorted(snapshot.documents.items()):
+        result.update(
+            canonical(
+                {"document": record.document.to_dict(), "revision": record.revision}
+            )
+        )
+        result.update(b"\n")
+    return result.hexdigest()

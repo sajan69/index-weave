@@ -131,6 +131,10 @@ class Writer:
 
     @classmethod
     def create(cls, path: str | Path):
+        return cls._create(path, MAGIC)
+
+    @classmethod
+    def _create(cls, path: str | Path, initial_bytes: bytes):
         require_platform()
         target = Path(path)
         os.mkdir(target, 0o700)
@@ -147,7 +151,7 @@ class Writer:
                 )
                 try:
                     if name == LOG:
-                        write_all(fd, MAGIC)
+                        write_all(fd, initial_bytes)
                     sync_file(fd)
                 finally:
                     os.close(fd)

@@ -1,4 +1,4 @@
-"""Version 1 log framing; no filesystem operations occur in this module."""
+"""Revisioned transaction framing and log-version dispatch; no file operations."""
 
 import hashlib
 import json
@@ -80,8 +80,8 @@ def apply_operations(
     return Snapshot.from_records(revision, records, live_bytes)
 
 
-def encode_frame(payload: bytes, revision: int) -> bytes:
-    prefix = PREFIX.pack(FRAME_MAGIC, len(payload), revision)
+def encode_frame(payload: bytes, revision: int, *, magic: bytes = FRAME_MAGIC) -> bytes:
+    prefix = PREFIX.pack(magic, len(payload), revision)
     header = prefix + hashlib.sha256(prefix).digest()
     return header + payload + hashlib.sha256(header + payload).digest() + COMMIT_MAGIC
 
@@ -157,14 +157,17 @@ class Inspection:
     valid_bytes: int
     log_bytes: int
     log_sha256: str
+    format_version: int = 1
+    checkpoint_revision: int = 0
+    checkpoint_bytes: int = 0
 
     @property
     def tail_bytes(self) -> int:
         return self.log_bytes - self.valid_bytes
 
     def to_dict(self):
-        return {
-            "format_version": 1,
+        result = {
+            "format_version": self.format_version,
             "status": "incomplete_tail" if self.tail_bytes else "clean",
             "revision": self.revision,
             "document_count": self.document_count,
@@ -174,6 +177,12 @@ class Inspection:
             "tail_bytes": self.tail_bytes,
             "log_sha256": self.log_sha256,
         }
+        if self.format_version == 2:
+            result.update(
+                checkpoint_revision=self.checkpoint_revision,
+                checkpoint_bytes=self.checkpoint_bytes,
+            )
+        return result
 
 
 def _partial_header(data: bytes, revision: int, offset: int):
@@ -195,10 +204,19 @@ def _partial_header(data: bytes, revision: int, offset: int):
 
 
 def scan(raw: bytes) -> tuple[Snapshot, Inspection]:
-    if not len(MAGIC) <= len(raw) <= MAX_LOG_BYTES or not raw.startswith(MAGIC):
+    from .checkpoint import MAGIC_V2, read_checkpoint
+
+    if not len(MAGIC) <= len(raw) <= MAX_LOG_BYTES:
         raise Corruption(0, "unsupported header or log size")
-    state = Snapshot.from_records(0, {}, 0)
-    offset = len(MAGIC)
+    version, base_revision, base_bytes = 1, 0, 0
+    if raw.startswith(MAGIC_V2):
+        state, offset = read_checkpoint(raw)
+        version, base_revision, base_bytes = 2, state.revision, offset
+    elif raw.startswith(MAGIC):
+        state = Snapshot.from_records(0, {}, 0)
+        offset = len(MAGIC)
+    else:
+        raise Corruption(0, "unsupported header or log size")
     while offset < len(raw):
         remainder = len(raw) - offset
         revision = state.revision + 1
@@ -243,5 +261,8 @@ def scan(raw: bytes) -> tuple[Snapshot, Inspection]:
         offset,
         len(raw),
         hashlib.sha256(raw).hexdigest(),
+        version,
+        base_revision,
+        base_bytes,
     )
     return state, report

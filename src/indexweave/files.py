@@ -66,7 +66,7 @@ def workspace(path: str | Path):
             )
         if set(os.listdir(fd)) != FILES:
             raise InvalidWorkspace(
-                "The workspace does not contain exactly the version 1 storage files."
+                "The workspace does not contain exactly the supported storage files."
             )
         yield fd
     finally:

@@ -2,10 +2,10 @@
 
 A document search application with a custom persistent document store. Its
 product scope includes lexical and embedding-based retrieval, an API and a web
-interface. The available package provides revisioned storage and positional
-lexical search, immutable persisted index segments and derived-index compaction
-through Python and a CLI. It does not yet provide model inference, an HTTP
-server or a web interface.
+interface. The available Python package and CLI provide revisioned storage,
+positional lexical search, persisted index segments and revision-preserving
+checkpoint copies. Model inference, an HTTP server and a web interface are not
+yet provided.
 
 ## Storage quickstart
 
@@ -68,9 +68,9 @@ assert record.document.text == "A searchable note"
 
 One writer holds a lifetime lease. Independent readers can obtain immutable
 snapshots between writes; they receive a Busy error while an exclusive write
-gate is held. Whole-log replay is bounded and intentionally simple. There is no
-source-log compaction or general-purpose SQL/relational-database compatibility
-in this interface.
+gate is held. Whole-log replay is bounded and intentionally simple. Source
+compaction creates a new revision-preserving workspace; this is not a
+general-purpose SQL/relational database.
 
 ## Search
 
@@ -94,6 +94,16 @@ lives in a separate directory and preserves the source document log.
 
 ```sh
 .venv/bin/python examples/segments_demo.py
+```
+
+## Source compaction
+
+[Checkpoint semantics](docs/CHECKPOINTS.md) describes explicit source-log
+compaction into a new workspace while retaining global and document revisions.
+The original stays untouched; later writes to the new copy are independent.
+
+```sh
+.venv/bin/python examples/compaction_demo.py
 ```
 
 ## Verification

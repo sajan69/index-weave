@@ -12,6 +12,7 @@ from . import (
     Writer,
     __version__,
     compact_index,
+    compact_store,
     create_index,
     inspect,
     inspect_index,
@@ -61,9 +62,13 @@ def parser():
         "index-inspect",
         "index-compact",
         "index-vacuum",
+        "compact-store",
     ]:
         child = commands.add_parser(command)
         child.add_argument("workspace")
+        if command == "compact-store":
+            child.add_argument("--out", required=True)
+            child.add_argument("--expected-revision", type=int, required=True)
         if command in {"search", "index-create", "index-refresh"}:
             child.add_argument("--index", required=command != "search")
         if command in {"index-refresh", "index-compact", "index-vacuum"}:
@@ -97,6 +102,10 @@ def parser():
 
 def execute(args):
     require_platform()
+    if args.command == "compact-store":
+        return compact_store(
+            args.workspace, args.out, expected_revision=args.expected_revision
+        )
     if args.command == "create":
         with Writer.create(args.workspace) as writer:
             return {"revision": writer.snapshot().revision, "document_count": 0}

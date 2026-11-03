@@ -36,9 +36,9 @@ Existing paths are never automatically reset, removed or reused. An incomplete
 append is not silently truncated; explicit matching-token repair may discard
 unacknowledged changes. Complete corruption is refused. Preserve the original
 before deciding to repair, and do not copy a live workspace during writes and
-assume it is a consistent backup. This version has no online backup or
-source-log compaction API. Derived index compaction does not erase source
-history.
+assume it is a consistent backup. There is no online backup or in-place
+source-log replacement. Explicit checkpoint copies preserve the original, and
+derived index compaction does not erase source history.
 
 Pinned libraries provide advisory locking and development tooling. The versioned
 log format, state transitions, capacity checks and recovery decisions are
@@ -72,3 +72,12 @@ corrupt active generation blocks cleanup instead of selecting an older one. A
 failed publication can be visible despite an unsuccessful acknowledgement.
 Runtime provenance mismatches require an explicit new index build, not silent
 re-analysis or authentication bypass.
+
+## Checkpoint copies
+
+[Source compaction](CHECKPOINTS.md) creates a new independent workspace and
+never resets an existing target or writes inside the original source. The
+original still contains historical plaintext. A partial checkpoint is refused,
+not silently repaired to a smaller state. A new complete but unacknowledged copy
+may be visible after failure; inspect it rather than assuming failure means no
+output. This is not an encrypted backup or a physical durability certification.

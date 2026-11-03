@@ -1,3 +1,4 @@
+from .compaction import compact_store
 from .lexical import LexicalIndex
 from .model import Delete, Document, Put, Record, Snapshot
 from .segments import (
@@ -18,6 +19,7 @@ __all__ = [
     "compact_index",
     "vacuum_index",
     "inspect_index",
+    "compact_store",
     "Delete",
     "Document",
     "LexicalIndex",

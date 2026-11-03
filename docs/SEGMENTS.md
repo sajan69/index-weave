@@ -195,5 +195,7 @@ All active segment bytes are loaded and validated into memory. Source snapshot
 verification still replays the document log. This is not a memory-mapped, lazy
 posting reader, a network service or a measured speed improvement. Old document
 text can remain in delta segments, unreferenced files, memory and the source
-log. Vacuum is not secure erasure. Source-log compaction, online backup, model
-inference, semantic retrieval and a web interface are not provided by this API.
+log. Vacuum is not secure erasure. Source-log compaction is a
+[separate explicit checkpoint-copy operation](CHECKPOINTS.md). Online backup,
+model inference, semantic retrieval and a web interface are not provided by the
+derived-index API.
