@@ -97,9 +97,7 @@
           "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
           "value": {
             "_name_or_path": "nreimers/MiniLM-L6-H384-uncased",
-            "architectures": [
-              "BertModel"
-            ],
+            "architectures": ["BertModel"],
             "attention_probs_dropout_prob": 0.1,
             "gradient_checkpointing": false,
             "hidden_act": "gelu",

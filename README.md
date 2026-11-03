@@ -138,6 +138,6 @@ custom.
 Document bytes are stored as plaintext. Private file modes and checksums do not
 provide encryption, authentication or universal power-loss protection. Read the
 [security and filesystem boundaries](docs/SECURITY.md) and
-[verification evidence](docs/EVALUATION.md). Demonstrations are synthetic; no
+[verification evidence](docs/EVALUATION.md). Engine demonstrations use synthetic fixtures; no
 production adoption, storage certification or AI retrieval results are claimed.
 Lexical example outcomes check mechanics, not held-out relevance quality.

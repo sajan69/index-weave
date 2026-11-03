@@ -141,7 +141,8 @@ def prepare(target):
         with os.fdopen(descriptor, "w", encoding="utf-8") as stream:
             json.dump(value, stream, ensure_ascii=False, sort_keys=True, indent=2)
             stream.write("\n")
-    print("RETRIEVAL_DATA=" + json.dumps(result, sort_keys=True))
+    summary = {key: value for key, value in result.items() if key != "question_ids"}
+    print("RETRIEVAL_DATA=" + json.dumps(summary, sort_keys=True))
 
 
 if __name__ == "__main__":

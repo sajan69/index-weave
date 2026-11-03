@@ -134,6 +134,16 @@ jobs:
           python scripts/audit_retrieval_sources.py
           artifacts/retrieval-audit.json
       - run: python scripts/prepare_retrieval_data.py artifacts/retrieval-data
+      - name: Verify the frozen projection
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          actual = json.loads(Path("artifacts/retrieval-data/summary.json").read_text())
+          expected = json.loads(Path("examples/retrieval-data.json").read_text())["result"]
+          assert actual == expected, "Public-data projection differs from the frozen record"
+          print("Frozen projection and 200 split IDs verified")
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: retrieval-source-audit

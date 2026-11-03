@@ -368,3 +368,51 @@ retrieval results, model inference, representative-scale measurements, HTTP API
 or end-user browser workflows in this evidence. See the exact
 [checkpoint contract](CHECKPOINTS.md), including independent-fork semantics and
 failure limits.
+
+## Public retrieval input verification
+
+The [fixed protocol](RETRIEVAL.md) was committed before inference or relevance
+measurement. The [source audit](../examples/retrieval-sources.json) records the
+public dataset revision, declared licences, model assets and four downloaded
+configuration hashes. Model weights were not downloaded or executed by that
+audit. The model configuration uses maintained Transformer, mean Pooling and
+Normalize components, with 384 dimensions and a 256-token sentence limit.
+
+The [recorded data result](../examples/retrieval-data.json) comes from successful
+Ubuntu CPython 3.12 data-preparation job `126144783322` in
+[source run 41701246266](https://github.com/sajan69/index-weave/actions/runs/41701246266)
+at commit `b543896c964458823e6cb6b0e8ca9a566db21818`. That source run had a
+separate JSON formatting failure; the data job itself completed successfully.
+It installed PyArrow 26.0.1, downloaded only the pinned public validation
+parquet, verified its length and SHA-256, and parsed it without the answer
+column. All selected contexts and supporting annotations passed the frozen
+projection rules; no selected question was replaced or excluded.
+
+- Validation rows checked: 7,405.
+- Downloaded file bytes: 27,452,575.
+- Selected questions: 100 development and 100 holdout.
+- Distinct complete title/paragraph units: 1,984, including distractors.
+- Dataset revision: `1908d6afbbead072334abe2965f91bd2709910ab`.
+- Download SHA-256: `c20b638ca82b21d04fe12e14ff417ad05153d4d215a65de54497fca4e972f7c6`.
+- Projection SHA-256: `6f9f7ace0909bd28179a253984f050dc56de92b3e2a4d7c7fee546e789c8ba56`.
+
+The data record freezes the ordered question IDs and split without copying
+question text or passages into the repository. The generated corpus carries
+HotpotQA/Wikipedia attribution, CC BY-SA 4.0 and transformation notices. The CI
+artifact retains only its summary and source audit for seven days. Use the
+preparation command in the protocol document to reproduce the corpus locally;
+existing destinations are refused.
+
+The installed wheel passed 107 distinct test methods on Ubuntu Python 3.12,
+3.13 and 3.14 and macOS Python 3.12 in that source run. These include the prior
+92 core methods and 15 new synthetic projection, metric, source-audit and
+acquisition-guard methods. The same designs are repeated across environments.
+The new tests include hand-calculated rank discounts and full relevance
+denominators, deterministic ID selection, retained distractors, invalid
+annotations, byte/hash mismatch refusal and non-overwrite guards. Local
+CPython 3.12.14 separately passed all 107 methods from an installed wheel.
+
+This verifies acquisition, provenance, projection and metric mechanics. It is
+not a retrieval-quality, model-inference, latency or capacity result. No neural
+ranking scores, held-out errors, AI improvement, representative workload
+measurements or browser/API outcomes are reported here.
