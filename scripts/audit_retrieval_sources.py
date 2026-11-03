@@ -70,10 +70,13 @@ def selected_assets(entries, names):
 def run():
     data = metadata("datasets", DATASET)
     revision = sha(data["sha"])
-    if data.get("cardData", {}).get("license") != "cc-by-sa-4.0":
+    if data.get("cardData", {}).get("license") not in (
+        "cc-by-sa-4.0",
+        ["cc-by-sa-4.0"],
+    ):
         raise ValueError("Dataset licence declaration changed")
     model = metadata("models", MODEL)
-    if model.get("cardData", {}).get("license") != "apache-2.0":
+    if model.get("cardData", {}).get("license") not in ("apache-2.0", ["apache-2.0"]):
         raise ValueError("Model licence declaration changed")
     assets = selected_assets(tree("models", MODEL, MODEL_REVISION), MODEL_FILES)
     reviewed = {}

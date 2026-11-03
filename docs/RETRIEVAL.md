@@ -1,24 +1,24 @@
 # Retrieval experiment contract
 
 The protocol identifier is `hotpot-pool-v1`. This specifies a bounded passage
-retrieval experiment, not question answering or a leaderboard reproduction.
-It is fixed before model inference, ranking selection or held-out errors.
-There are no relevance scores or semantic retrieval results in this document.
+retrieval experiment, not question answering or a leaderboard reproduction. It
+is fixed before model inference, ranking selection or held-out errors. There are
+no relevance scores or semantic retrieval results in this document.
 
 ## Data and permissions
 
-The [HotpotQA publishers](https://hotpotqa.github.io/) distribute the dataset and
-processed Wikipedia under
-[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
-The dataset is attributed to Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio,
-William W. Cohen, Ruslan Salakhutdinov and Christopher D. Manning,
-_HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering_, 2018.
-Wikipedia contributors remain the authors of the source passages. Derived data
-must retain this attribution, licence link, source-title links and a description
-of changes; it is not a licence declaration for unrelated application code.
+The [HotpotQA publishers](https://hotpotqa.github.io/) distribute the dataset
+and processed Wikipedia under
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The dataset is
+attributed to Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio, William W.
+Cohen, Ruslan Salakhutdinov and Christopher D. Manning, _HotpotQA: A Dataset for
+Diverse, Explainable Multi-hop Question Answering_, 2018. Wikipedia contributors
+remain the authors of the source passages. Derived data must retain this
+attribution, licence link, source-title links and a description of changes; it
+is not a licence declaration for unrelated application code.
 
-The original development distractor download returned HTTP 503 during the
-4 November 2026 review. The separately versioned
+The original development distractor download returned HTTP 503 during the 4
+November 2026 review. The separately versioned
 [Hugging Face distribution](https://huggingface.co/datasets/hotpotqa/hotpot_qa)
 is the candidate acquisition source. A fixed-source metadata audit records its
 actual commit, asset digest and licence declaration before ingestion. A mirror
@@ -49,7 +49,8 @@ relevant document. Do not invent labels or index the answer field. Reject schema
 errors and source units outside existing storage bounds rather than silently
 truncating or filtering favourable examples. Record title/text variants and any
 annotation limitations. The pooled corpus is deliberately smaller and easier
-than full-Wikipedia retrieval; unlabelled documents are not proof of irrelevance.
+than full-Wikipedia retrieval; unlabelled documents are not proof of
+irrelevance.
 
 This holdout controls our own development decisions. It does not establish that
 the pretrained model never saw these questions or source text during training.
@@ -60,10 +61,10 @@ prospective, contamination-free or representative end-user evaluation.
 
 Use one pretrained CPU model:
 [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
-at revision `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`, declared Apache-2.0.
-The model card describes 384-dimensional embeddings and a default 256-wordpiece
-input limit. Review and hash its configuration, tokenizer and safetensors assets;
-do not load pickle weights, repository Python or custom model modules.
+at revision `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`, declared Apache-2.0. The
+model card describes 384-dimensional embeddings and a default 256-wordpiece
+input limit. Review and hash its configuration, tokenizer and safetensors
+assets; do not load pickle weights, repository Python or custom model modules.
 No training, hyperparameter search or alternative-model tournament is included.
 
 Document-body windows contain at most 192 tokenizer wordpieces with stride 160.
@@ -76,11 +77,11 @@ search. A document's semantic score is its maximum passage score; ties use ID.
 No approximate index, reranker or generative answer is part of this protocol.
 
 The lexical baseline is full-snapshot BM25 over a bag of normalized free-text
-question terms with OR candidate retrieval, using the existing `k1=1.2`, `b=0.75`
-and positive IDF. It is **not** the strict required-clause command applied to a
-natural-language question. Count each unique term once; no stopword removal or
-question-specific rewrite. The same complete paragraph/title units are used by
-all methods.
+question terms with OR candidate retrieval, using the existing `k1=1.2`,
+`b=0.75` and positive IDF. It is **not** the strict required-clause command
+applied to a natural-language question. Count each unique term once; no stopword
+removal or question-specific rewrite. The same complete paragraph/title units
+are used by all methods.
 
 Compare lexical, semantic and a fixed equal-weight reciprocal-rank fusion of
 their first 100 document ranks: sum `1 / (60 + rank)` for each list containing
@@ -106,13 +107,13 @@ from this bounded experiment.
 
 ## Mechanical validation
 
-`indexweave.retrieval_data` implements the deterministic row selection, paragraph
-projection, source offsets through original sentence preservation, binary
-metrics and fixed fusion rule without network access or model inference. Its
-synthetic tests exercise hand-calculated metrics, full relevance denominators,
-ID-only selection, distractor retention, ambiguous titles, malformed annotations
-and storage bounds. These tests are correctness checks, not retrieval-quality
-results. `scripts/audit_retrieval_sources.py` audits fixed public metadata and
-allowlisted model configurations in CI; it does not download weights or run a
-model. The audit artifact distinguishes declared licences and asset digests from
-verified downloaded bytes.
+`indexweave.retrieval_data` implements the deterministic row selection,
+paragraph projection, source offsets through original sentence preservation,
+binary metrics and fixed fusion rule without network access or model inference.
+Its synthetic tests exercise hand-calculated metrics, full relevance
+denominators, ID-only selection, distractor retention, ambiguous titles,
+malformed annotations and storage bounds. These tests are correctness checks,
+not retrieval-quality results. `scripts/audit_retrieval_sources.py` audits fixed
+public metadata and allowlisted model configurations in CI; it does not download
+weights or run a model. The audit artifact distinguishes declared licences and
+asset digests from verified downloaded bytes.
