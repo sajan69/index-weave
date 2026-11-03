@@ -7,6 +7,7 @@ import sys
 from . import (
     Delete,
     Document,
+    LexicalIndex,
     Put,
     Writer,
     __version__,
@@ -36,13 +37,27 @@ def _text_file(path: str) -> str:
 def parser():
     result = argparse.ArgumentParser(
         prog="indexweave",
-        description="Revisioned local document storage; no search or AI inference yet.",
+        description="Revisioned local storage and lexical search; no AI inference yet.",
     )
     result.add_argument("--version", action="version", version=__version__)
     commands = result.add_subparsers(dest="command", required=True)
-    for command in ["create", "inspect", "list", "get", "put", "delete", "repair-tail"]:
+    for command in [
+        "create",
+        "inspect",
+        "list",
+        "get",
+        "put",
+        "delete",
+        "repair-tail",
+        "search",
+    ]:
         child = commands.add_parser(command)
         child.add_argument("workspace")
+        if command == "search":
+            child.add_argument("--query", required=True)
+            child.add_argument(
+                "--limit", type=int, choices=range(1, 101), default=10, metavar="1..100"
+            )
         if command in {"get", "put", "delete"}:
             child.add_argument("--id", required=True)
         if command == "put":
@@ -93,6 +108,8 @@ def execute(args):
                 "document_count": len(snapshot.documents),
             }
     snapshot = read_snapshot(args.workspace)
+    if args.command == "search":
+        return LexicalIndex.from_snapshot(snapshot).search(args.query, limit=args.limit)
     if args.command == "get":
         record = snapshot.get(args.id)
         if record is None:

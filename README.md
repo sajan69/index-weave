@@ -2,12 +2,13 @@
 
 A document search application with a custom persistent document store. Its
 product scope includes lexical and embedding-based retrieval, an API and a web
-interface. The available package provides the revisioned storage API and CLI. It
-does not yet provide search, model inference, an HTTP server or a web interface.
+interface. The available package provides revisioned storage and positional
+lexical search through Python and a CLI. It does not yet provide model
+inference, an HTTP server or a web interface.
 
 ## Storage quickstart
 
-Use Python 3.12 or newer on a POSIX local filesystem. Workspace parents must be
+Use CPython 3.12 or newer on a POSIX local filesystem. Workspace parents must be
 trusted. Installation needs access to the Python package registry; storage
 operations make no network requests and require no API keys.
 
@@ -20,6 +21,7 @@ mkdir -p collections
 .venv/bin/indexweave get collections/example --id welcome
 .venv/bin/indexweave list collections/example
 .venv/bin/indexweave inspect collections/example
+.venv/bin/indexweave search collections/example --query 'search tag:notes'
 ```
 
 Creation refuses existing paths. Put inserts or replaces the whole document
@@ -66,8 +68,21 @@ assert record.document.text == "A searchable note"
 One writer holds a lifetime lease. Independent readers can obtain immutable
 snapshots between writes; they receive a Busy error while an exclusive write
 gate is held. Whole-log replay is bounded and intentionally simple. There is no
-compaction, index or general-purpose SQL/relational-database compatibility in
-this interface.
+compaction, persisted index or general-purpose SQL/relational-database
+compatibility in this interface.
+
+## Search
+
+[Lexical search semantics](docs/SEARCH.md) defines required terms, quoted
+phrases, exact tag filters, Unicode offsets, snapshot consistency and BM25
+ranking. Search rebuilds an in-memory index from a strict snapshot; it does not
+mutate storage. Results include source passages, score contributions and
+revision provenance. For a temporary fictional collection with search and
+update/delete checks:
+
+```sh
+.venv/bin/python examples/search_demo.py
+```
 
 ## Verification
 
@@ -91,11 +106,14 @@ separate-process locks, capacity boundaries and installed CLI operations.
 Formatting uses Ruff for Python and Prettier for supported
 documentation/configuration files. Ruff excludes Markdown to keep one formatter
 responsible for those files. Portalocker supplies advisory locks; the log codec
-and storage semantics are custom.
+and storage semantics are custom. The maintained `regex` package supplies
+Unicode property matching; positional indexing, query execution and scoring are
+custom.
 
 Document bytes are stored as plaintext. Private file modes and checksums do not
 provide encryption, authentication or universal power-loss protection. Read the
 [security and filesystem boundaries](docs/SECURITY.md) and
 [storage verification evidence](docs/EVALUATION.md). Demonstrations are
 synthetic; no production adoption, storage certification or AI retrieval results
-are claimed.
+are claimed. Lexical example outcomes check mechanics, not held-out relevance
+quality.

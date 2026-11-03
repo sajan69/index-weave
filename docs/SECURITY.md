@@ -47,3 +47,14 @@ dictionary-oracle test; see its
 Tests use synthetic data and private temporary workspaces. No real-user
 documents, credentials, public deployment, formal security review or power-loss
 certification are claimed.
+
+## Search output
+
+Lexical search is offline and reads a strict snapshot. It does not repair logs
+or write index files. Its additional input, index and output bounds are
+described in [search semantics](SEARCH.md). Queries, titles, tags and source
+passages can be sensitive; protect stdout and exported JSON. Strings and offsets
+are evidence, not sanitized HTML. No caller-supplied regex or executable query
+is evaluated. Unicode analysis uses the pinned `regex` package (Apache-2.0 AND
+CNRI-Python); this is not a general file-content sanitizer or a security
+certification.

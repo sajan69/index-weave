@@ -61,10 +61,27 @@ jobs:
           assert actual == recorded, "Synthetic storage output differs from the recorded format fixture"
           print("STORAGE_DEMO=" + json.dumps(actual, sort_keys=True))
           PY
+      - name: Run the synthetic lexical search example
+        run: |
+          python examples/search_demo.py > artifacts/search-demo.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result = json.loads(Path("artifacts/search-demo.json").read_text())
+          assert result["completed"] and result["old_index_unchanged"]
+          assert result["deleted_and_replaced_terms_absent"]
+          print("SEARCH_DEMO=" + json.dumps({
+              "completed": result["completed"],
+              "initial_index": result["initial_index"],
+              "current_index": result["current_index"],
+              "queries": [{"query": q["query"], "ids": [h["id"] for h in q["hits"]]} for q in result["queries"]],
+          }, sort_keys=True))
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: storage-${{ matrix.os }}-${{ matrix.python }}
           path: |
             artifacts/storage-demo.json
+            artifacts/search-demo.json
             dist/*.whl
           retention-days: 7
