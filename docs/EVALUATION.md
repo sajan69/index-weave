@@ -270,3 +270,101 @@ checkpoints, physical power loss, representative scale, relevance-labelled
 semantic/hybrid retrieval or end-user browser workflows.
 [Persistent index semantics](SEGMENTS.md) states the publication, cleanup,
 source-snapshot and filesystem limits.
+
+## Source-checkpoint verification
+
+The checkpoint implementation at
+[`aabac0baed8fee5cf6cbfeb897bddfd4db2afa61`](https://github.com/sajan69/index-weave/commit/aabac0baed8fee5cf6cbfeb897bddfd4db2afa61)
+was exercised by
+[CI run 41643334038](https://github.com/sajan69/index-weave/actions/runs/41643334038)
+on 3 November 2026. All five jobs passed: quality checks and installed wheels on
+Ubuntu with CPython 3.12, 3.13 and 3.14, and macOS with CPython 3.12. Each wheel
+passed 92 methods: the preceding 72 and 20 checkpoint methods. Repeated runs
+across environments are not 368 different test designs. The quality job passed
+Ruff lint/format for 32 Python files, Prettier and 35 links. The inspected wheel
+contains fifteen Python modules, with no additional runtime dependency.
+
+The checkpoint methods cover an independently hand-built byte fixture,
+truncation at every prefix of that fixture, selected complete bit flips and
+missing commit footer, checksum-valid semantic errors, empty and maximum
+revisions, actual 201-record count packing and 21 large-record byte packing,
+sequential transactions after the checkpoint, every incomplete prefix of one
+following transaction, encoder accounting and reduced-budget guards, and strict
+JSON/depth/value/UTF-8 checks.
+
+Integration methods verify source byte equality, old snapshot stability, global
+and per-document revisions, compare-and-set writes after compaction,
+compatibility with an existing derived index, stale expected revisions,
+existing/nested target refusal, source writer-lease refusal, unrepairable
+incomplete bases, explicit repair only after a complete base, corrupt source
+refusal and the installed CLI. A dictionary reference test caps generation at 20
+examples of 1–10 document changes, with repeated compaction every second change.
+It compares live text, each document's last-put revision, global revision and
+content digest after reopening; these are mechanical state checks, not relevance
+judgments.
+
+Fault injection fails each of the five destination initialization sync calls:
+two lock files, the log file, the new directory and its parent. The original
+source bytes remain equal. A complete but unsynchronized copy can already be
+readable after a later sync failure; that observation is not a hardware
+durability guarantee. Partial targets are never reset on retry.
+
+Actual child processes exit with code 31 before checkpoint bytes are written,
+with code 32 after a 70-byte partial write, or receive SIGKILL immediately after
+the real checkpoint-file sync. The expected exit codes are checked. Partial
+bases are refused; a complete but unacknowledged copy can be read, and the
+source remains unchanged in each case. No physical power removal, faulty
+controller, network filesystem or exhaustive concurrency proof is claimed.
+
+### Worked checkpoint copy
+
+[The recorded result](../examples/compaction-demo.json) comes from successful
+Ubuntu CPython 3.12 job `125942134731` in that source run. Reproduce it with
+`python examples/compaction_demo.py`. All input text is fictional, and all
+workspaces are new private temporary directories. The script writes three
+initial documents, replaces one five times, then replaces it once more and
+deletes another document in revision 7.
+
+| Observation                                               | Actual result         |
+| --------------------------------------------------------- | --------------------- |
+| Original version-1 log bytes                              | 8,004                 |
+| New version-2 checkpoint log bytes, before a later append | 643                   |
+| Preserved global revision                                 | 7                     |
+| Live document revisions                                   | `guide`: 7, `keep`: 1 |
+| Live document count                                       | 2                     |
+| New copy's revision after an independent append           | 8                     |
+| Original's revision after that append                     | 7                     |
+
+The file-byte counts include complete log headers, metadata, record chunks,
+checksums and commit markers. They exclude locks, directory allocation, memory,
+indexes and filesystem allocation units. The original 8,004-byte file is kept;
+the copy operation initially adds storage rather than freeing it. This small
+history-heavy fixture does not establish a general size reduction, capacity,
+latency, throughput or compression ratio. An empty source can produce a larger
+checkpoint because of framing overhead.
+
+All four source-run environments produced the same 643-byte checkpoint with
+SHA-256:
+
+```text
+d9121bf417b0100c1935c518d37abdf2de6e2a9fd931614a4cd15a9572884095
+```
+
+The preserved live-content digest is:
+
+```text
+ecb35b2e47f1cd2d1818a00b286cbf32462be8f16c8adb0fcb6e733cdc5000f2
+```
+
+The existing derived index returned the same result against the compacted source
+before its later independent write. The old in-memory snapshot still contained
+the deleted document, while the checkpoint did not. Version-1 storage examples
+also continued to match their original recorded byte-format fixture in every
+job; ordinary creation and opening do not silently migrate old workspaces.
+
+The local CPython 3.12.14 installed wheel separately passed all 92 methods and
+completed the same example. There are still no labelled semantic/hybrid
+retrieval results, model inference, representative-scale measurements, HTTP API
+or end-user browser workflows in this evidence. See the exact
+[checkpoint contract](CHECKPOINTS.md), including independent-fork semantics and
+failure limits.

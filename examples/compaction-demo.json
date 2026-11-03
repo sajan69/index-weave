@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "source": {
+    "execution_kind": "github_actions",
+    "commit": "aabac0baed8fee5cf6cbfeb897bddfd4db2afa61",
+    "run_id": 41643334038,
+    "job_id": 125942134731,
+    "runner": "ubuntu-latest",
+    "python_series": "3.12",
+    "scope": "synthetic checkpoint copy; original retained, not a performance or hardware durability benchmark"
+  },
+  "result": {
+    "checkpoint_bytes": 643,
+    "compaction": {
+      "content_sha256": "ecb35b2e47f1cd2d1818a00b286cbf32462be8f16c8adb0fcb6e733cdc5000f2",
+      "destination_log_bytes": 643,
+      "destination_log_sha256": "d9121bf417b0100c1935c518d37abdf2de6e2a9fd931614a4cd15a9572884095",
+      "document_count": 2,
+      "format_version": 2,
+      "revision": 7,
+      "source_log_bytes": 8004
+    },
+    "completed": true,
+    "copied_content_sha256": "ecb35b2e47f1cd2d1818a00b286cbf32462be8f16c8adb0fcb6e733cdc5000f2",
+    "existing_index_compatible": true,
+    "old_snapshot_preserved": true,
+    "preserved_document_revisions": {
+      "guide": 7,
+      "keep": 1
+    },
+    "source_revision_after_target_append": 7,
+    "source_unchanged": true,
+    "target_revision_after_append": 8,
+    "workload": "synthetic-source-compaction-v1"
+  }
+}
