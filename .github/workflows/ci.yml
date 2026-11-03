@@ -21,7 +21,13 @@ jobs:
       - run: pip install -r requirements-dev.txt
       - run: npm ci --ignore-scripts
       - run: ruff check . && ruff format --check .
-      - run: npm run format:check
+      - name: Check formatting
+        run: |
+          if ! npm run format:check; then
+            npm run format
+            git diff --exit-code
+            exit 1
+          fi
       - run: npm run links
   storage:
     strategy:
@@ -111,4 +117,20 @@ jobs:
             artifacts/segments-demo.json
             artifacts/compaction-demo.json
             dist/*.whl
+          retention-days: 7
+
+  retrieval-source-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: mkdir -p artifacts
+      - run: python scripts/audit_retrieval_sources.py artifacts/retrieval-audit.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: retrieval-source-audit
+          path: artifacts/retrieval-audit.json
           retention-days: 7
