@@ -122,7 +122,7 @@ npm run format:check
 npm run links
 .venv/bin/python -m build --wheel --no-isolation
 .venv/bin/pip install --force-reinstall --no-deps dist/*.whl
-.venv/bin/python -m unittest discover -s tests -v
+PATH="$PWD/.venv/bin:$PATH" .venv/bin/python -m unittest discover -s tests -v
 ```
 
 Tests include a reference state machine, frame truncation/corruption cases,

@@ -129,6 +129,7 @@ without running a model:
 
 ```sh
 .venv/bin/pip install -r requirements-data.txt
+mkdir -p artifacts
 .venv/bin/python scripts/prepare_retrieval_data.py artifacts/retrieval-data
 ```
 
