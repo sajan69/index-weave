@@ -4,8 +4,8 @@ A document search application with a custom persistent document store. Its
 product scope includes lexical and embedding-based retrieval, an API and a web
 interface. The available Python package and CLI provide revisioned storage,
 positional lexical search, persisted index segments and revision-preserving
-checkpoint copies. Model inference, an HTTP server and a web interface are not
-yet provided.
+checkpoint copies. Optional offline CPU embeddings provide semantic and hybrid
+retrieval. An HTTP server and a web interface are not yet provided.
 
 ## Storage quickstart
 
@@ -85,6 +85,9 @@ update/delete checks:
 ```sh
 .venv/bin/python examples/search_demo.py
 ```
+
+See [offline embedding retrieval](docs/SEMANTIC.md) for model acquisition,
+semantic/hybrid commands and resource boundaries.
 
 ## Persistent index
 

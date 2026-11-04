@@ -151,3 +151,52 @@ jobs:
             artifacts/retrieval-audit.json
             artifacts/retrieval-data/summary.json
           retention-days: 7
+
+  semantic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      HF_HUB_OFFLINE: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      DO_NOT_TRACK: "1"
+      TOKENIZERS_PARALLELISM: "false"
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+      OPENBLAS_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-dev.txt -r requirements-data.txt
+      - run:
+          pip install torch==2.15.0 --index-url
+          https://download.pytorch.org/whl/cpu
+      - run: pip install -r requirements-semantic.txt
+      - run: python -m build --wheel --no-isolation
+      - run: pip install --force-reinstall --no-deps dist/*.whl
+      - run: pip check
+      - run: python -m unittest discover -s tests -v
+      - run: mkdir -p artifacts
+      - name: Acquire the pinned public model explicitly
+        run:
+          indexweave model-fetch artifacts/minilm >
+          artifacts/model-verified.json
+      - name: Exercise actual offline inference and installed CLI
+        run: python examples/semantic_demo.py artifacts/minilm
+      - name: Prepare the frozen public corpus
+        run: python scripts/prepare_retrieval_data.py artifacts/evaluation-data
+      - name: Run the fixed retrieval comparison
+        run:
+          python scripts/evaluate_retrieval.py artifacts/evaluation-data
+          artifacts/minilm artifacts/retrieval-evaluation.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: retrieval-evaluation-cpu
+          path: |
+            artifacts/retrieval-evaluation.json
+            artifacts/model-verified.json
+            artifacts/minilm/MODEL-MANIFEST.json
+            artifacts/evaluation-data/summary.json
+          retention-days: 7

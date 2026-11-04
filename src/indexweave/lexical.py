@@ -221,6 +221,34 @@ class LexicalIndex:
             "hits": hits,
         }
 
+    def rank_text(self, query: str, *, limit: int = 10) -> dict:
+        """Free-text OR BM25; does not interpret required-clause query syntax."""
+        from .semantic import text_terms
+
+        if type(limit) is not int or not 1 <= limit <= 100:
+            raise InvalidInput("Search limit requires 1–100.")
+        terms = text_terms(query)
+        ids = set().union(*(self.postings.get(term, {}) for term in terms))
+        ranked = [(key, self._score(key, terms)[0]) for key in ids]
+        ranked.sort(key=lambda item: (-item[1], item[0]))
+        hits = []
+        for key, score in ranked[:limit]:
+            # Bound passage evidence to 16 matched terms while scoring every term.
+            clauses = [
+                Clause("term", (term,))
+                for term in terms
+                if key in self.postings.get(term, {})
+            ][:16]
+            hits.append(self._hit(key, score, clauses, terms))
+        return {
+            "index": self.metadata(),
+            "query": query,
+            "limit": limit,
+            "query_mode": "free-text-or-v1",
+            "total_matches": len(ranked),
+            "hits": hits,
+        }
+
     def _hit(self, document_id, score, clauses, terms) -> dict:
         matches = [self._matches(document_id, clause) for clause in clauses]
         _, explanation = self._score(document_id, terms)

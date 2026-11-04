@@ -1,0 +1,6 @@
+# Install the CPU torch wheel separately using the official CPU index.
+torch==2.15.0
+sentence-transformers==6.2.0
+transformers==5.22.1
+numpy==2.5.4
+safetensors==0.8.0

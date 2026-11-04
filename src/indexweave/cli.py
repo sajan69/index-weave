@@ -22,7 +22,7 @@ from . import (
     repair_tail,
     vacuum_index,
 )
-from .errors import MissingDocument, StoreError
+from .errors import InvalidInput, MissingDocument, StoreError
 from .files import require_platform
 from .model import MAX_TEXT_BYTES, valid_id
 
@@ -44,7 +44,7 @@ def _text_file(path: str) -> str:
 def parser():
     result = argparse.ArgumentParser(
         prog="indexweave",
-        description="Revisioned local storage and lexical search; no AI inference yet.",
+        description="Revisioned local storage, lexical and offline embedding search.",
     )
     result.add_argument("--version", action="version", version=__version__)
     commands = result.add_subparsers(dest="command", required=True)
@@ -63,6 +63,7 @@ def parser():
         "index-compact",
         "index-vacuum",
         "compact-store",
+        "model-fetch",
     ]:
         child = commands.add_parser(command)
         child.add_argument("workspace")
@@ -75,6 +76,12 @@ def parser():
             child.add_argument("--expected-generation", type=int, required=True)
         if command == "search":
             child.add_argument("--query", required=True)
+            child.add_argument(
+                "--mode",
+                choices=["strict", "text", "semantic", "hybrid"],
+                default="strict",
+            )
+            child.add_argument("--model")
             child.add_argument(
                 "--limit", type=int, choices=range(1, 101), default=10, metavar="1..100"
             )
@@ -102,6 +109,10 @@ def parser():
 
 def execute(args):
     require_platform()
+    if args.command == "model-fetch":
+        from .embedding import acquire_model
+
+        return acquire_model(args.workspace)
     if args.command == "compact-store":
         return compact_store(
             args.workspace, args.out, expected_revision=args.expected_revision
@@ -149,11 +160,36 @@ def execute(args):
             args.index, snapshot, expected_generation=args.expected_generation
         )
     if args.command == "search":
+        if args.mode in {"semantic", "hybrid"}:
+            from .embedding import MiniLMEncoder
+            from .semantic import SemanticIndex, hybrid_search
+
+            if not args.model or (args.mode == "semantic" and args.index):
+                raise InvalidInput(
+                    "Choose a local model; --index applies to lexical/hybrid search."
+                )
+            semantic = SemanticIndex.from_snapshot(snapshot, MiniLMEncoder(args.model))
+            if args.mode == "semantic":
+                return semantic.search(
+                    args.query, expected_snapshot=snapshot, limit=args.limit
+                )
+        elif args.model:
+            raise InvalidInput("A model applies only to semantic or hybrid search.")
         index = (
             load_index(args.index, expected_snapshot=snapshot)
             if args.index
             else LexicalIndex.from_snapshot(snapshot)
         )
+        if args.mode == "hybrid":
+            return hybrid_search(
+                index,
+                semantic,
+                args.query,
+                expected_snapshot=snapshot,
+                limit=args.limit,
+            )
+        if args.mode == "text":
+            return index.rank_text(args.query, limit=args.limit)
         return index.search(args.query, limit=args.limit)
     if args.command == "get":
         record = snapshot.get(args.id)

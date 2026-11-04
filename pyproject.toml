@@ -22,3 +22,6 @@ extend-exclude = ["*.md"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
+
+[tool.setuptools.package-data]
+indexweave = ["minilm-assets.json"]
