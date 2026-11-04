@@ -22,7 +22,7 @@ from .errors import (
     StoreError,
     UnusableWriter,
 )
-from .http_boundary import LocalBoundary
+from .http_boundary import SECURITY_HEADERS, LocalBoundary
 from .model import MAX_REVISION, Document
 
 Revision = Annotated[int, Field(ge=0, le=MAX_REVISION)]
@@ -145,6 +145,7 @@ def create_app(workspace, *, port=8765, model_path=None, encoder=None, web_root=
                 ),
             },
             status_code=503,
+            headers=SECURITY_HEADERS,
         )
 
     @app.get("/api/status")

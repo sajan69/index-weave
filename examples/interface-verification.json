@@ -1,0 +1,62 @@
+{
+  "source": {
+    "commit": "acce499971a398e2980387cb6a53c322a75f333c",
+    "run_id": 41792797105,
+    "run_url": "https://github.com/sajan69/index-weave/actions/runs/41792797105",
+    "conclusion": "success",
+    "date_brisbane": "2026-11-04"
+  },
+  "unit_methods": 126,
+  "new_api_service_methods": 10,
+  "installed_wheel_environments": [
+    "Ubuntu CPython 3.12",
+    "Ubuntu CPython 3.13",
+    "Ubuntu CPython 3.14",
+    "macOS CPython 3.12",
+    "Linux CPU/model CPython 3.12"
+  ],
+  "browser": {
+    "job_id": 126450100264,
+    "playwright": "1.64.1",
+    "engine": "Chromium",
+    "completed": true,
+    "scenarios": 3,
+    "actual_model": false,
+    "artifact_id": 13304451429,
+    "artifact_retention_days": 7
+  },
+  "cpu_browser": {
+    "job_id": 126450100150,
+    "completed": true,
+    "scenarios": 4,
+    "actual_model": true,
+    "model_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+  },
+  "inspected_screenshots": [
+    {
+      "file": "desktop.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "full_page": true,
+      "sha256": "af7168a6e00c74b480c0208604eae81a3aa3a3b43a5df8ffe94690fb25d540a6"
+    },
+    {
+      "file": "mobile.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "full_page": true,
+      "sha256": "469102b9b7e2a7409046c9f566ab519ae8ddfdaf55c4c955fbc7fb09683130b4"
+    }
+  ],
+  "data": "Fictional disposable documents; no private documents or human relevance labels.",
+  "limits": [
+    "Four distinct browser designs, repeated across jobs.",
+    "Chromium only; no accessibility certification or user study.",
+    "No representative-scale latency, throughput or memory claim.",
+    "Single trusted local workspace; no network/team deployment claim."
+  ]
+}

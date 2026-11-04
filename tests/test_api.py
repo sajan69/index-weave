@@ -27,7 +27,9 @@ class ApiTests(unittest.TestCase):
         self.web.mkdir()
         (self.web / "index.html").write_text("<!doctype html><title>Fixture</title>")
         self.app = create_app(self.source, web_root=self.web)
-        self.client = TestClient(self.app, base_url=BASE, headers=HEADERS)
+        self.client = TestClient(
+            self.app, base_url=BASE, headers=HEADERS, raise_server_exceptions=False
+        )
         self.client.__enter__()
 
     def tearDown(self):
@@ -190,6 +192,12 @@ class ApiTests(unittest.TestCase):
     def test_unknown_commit_and_io_failure_preserve_records(self):
         writer = self.app.state.service.writer
         before = (self.source / "documents.iwl").read_bytes()
+        with patch.object(writer, "write", side_effect=RuntimeError("PRIVATE/PATH")):
+            response = self.client.post("/api/documents", json=self.payload())
+            self.assertEqual(response.status_code, 503)
+            self.assertNotIn("PRIVATE/PATH", response.text)
+            self.assertEqual(response.headers.get("cache-control"), "no-store")
+            self.assertEqual(response.headers.get("x-content-type-options"), "nosniff")
         with patch.object(writer, "write", side_effect=OSError("PRIVATE/PATH")):
             response = self.client.post("/api/documents", json=self.payload())
             self.assertEqual(response.status_code, 503)

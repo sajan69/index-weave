@@ -1,9 +1,8 @@
 # Engine verification
 
-The installed storage package was exercised with synthetic documents, private
-local temporary workspaces and controlled failure injection. This evaluates the
-storage interface; it provides no search-quality, model-inference or end-user
-web application results.
+The sections below distinguish synthetic engine verification, public-corpus
+retrieval evaluation and installed browser workflows. Each result identifies its
+source commit and execution environment.
 
 ## Reproducible evidence
 
@@ -515,3 +514,53 @@ and possible pretraining overlap limit interpretation. There is no model
 training, prospective/contamination-free evaluation, adoption claim,
 HTTP/browser result or representative-scale reliability claim in these
 measurements.
+
+## Installed local interface
+
+[Source run 41792797105](https://github.com/sajan69/index-weave/actions/runs/41792797105)
+at commit `acce499971a398e2980387cb6a53c322a75f333c` passed all eight jobs on 4
+November 2026. The
+[interface evidence record](../examples/interface-verification.json) identifies
+the source jobs, browser viewports and inspected screenshot hashes. The built
+React assets were downloaded into each wheel build; browser tests launched the
+installed `indexweave-serve` command against a disposable fictional collection.
+They exercised the packaged interface, not a frontend mock server.
+
+All 126 distinct unit test methods passed on Ubuntu CPython 3.12, 3.13 and 3.14,
+macOS CPython 3.12, and the separate Linux CPU/model job. Ten added methods
+cover strict API validation, global-revision conflicts, collision/missing-ID
+guards, writer leasing, declared and streamed body limits, Host/Origin/Fetch
+Metadata refusal, query admission, sanitized failures and poisoned unknown write
+outcomes. Two of those ten use an explicitly fake encoder with controlled worker
+events to check discarded obsolete builds and failed-build lexical availability.
+They are mechanical consistency checks, not model-quality evidence. The
+installed local wheel separately passed all 126 methods on CPython 3.12.14.
+
+The Chromium/Playwright 1.64.1 browser job (`126450100264`) passed three
+workflows:
+
+- Create, exact phrase/tag search, concurrent-tab conflict with the unsaved
+  draft retained, explicit reload, save with editor controls paused, and
+  deletion.
+- Strict UTF-8 Markdown import, inert script-like source text, byte-for-byte
+  download preserving a BOM and CRLF, and a refused foreign-origin mutation.
+- Invalid UTF-8 refusal and a 390 × 844 mobile viewport without horizontal
+  overflow or external browser requests.
+
+The CPU/model job (`126450100150`) repeated those workflows and passed a fourth
+using the actual verified MiniLM model. It built a semantic generation, searched
+with hybrid ranking, edited the document, observed stale state, explicitly
+rebuilt, and retrieved the updated source passage. This demonstrates local model
+integration and invalidation; it does not supply new human relevance labels or
+alter the frozen retrieval protocol above. Four workflows repeated in two jobs
+are four designs, not seven distinct scenarios.
+
+The desktop (1440 × 1000 viewport) and mobile full-page screenshots were
+visually inspected for readable controls, source text, panel layout and
+overflow. The `indexweave-browser` artifact retains them for seven days. The
+quality job passed Ruff, Prettier, ESLint, TypeScript checking, the Vite
+production build and all 66 documentation links. API and browser setup is
+documented in [the local interface guide](API.md). These synthetic functional
+checks do not establish accessibility conformance, every browser engine, a user
+study, network/team deployment security, production throughput or
+representative-scale memory/latency bounds.
