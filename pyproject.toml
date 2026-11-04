@@ -11,6 +11,7 @@ dependencies = ["portalocker==4.4.2", "regex==2026.9.29"]
 
 [project.scripts]
 indexweave = "indexweave.cli:main"
+indexweave-serve = "indexweave.server:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -24,4 +25,4 @@ extend-exclude = ["*.md"]
 select = ["E", "F", "I", "B", "UP"]
 
 [tool.setuptools.package-data]
-indexweave = ["minilm-assets.json"]
+indexweave = ["minilm-assets.json", "web/*", "web/assets/*"]

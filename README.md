@@ -5,7 +5,15 @@ product scope includes lexical and embedding-based retrieval, an API and a web
 interface. The available Python package and CLI provide revisioned storage,
 positional lexical search, persisted index segments and revision-preserving
 checkpoint copies. Optional offline CPU embeddings provide semantic and hybrid
-retrieval. An HTTP server and a web interface are not yet provided.
+retrieval. A local FastAPI service and responsive React interface support
+document import, editing, revision-aware search and deletion.
+
+## Local interface
+
+See [local setup and API behavior](docs/API.md) for the browser workflow. Build
+with Node 24, install the optional API requirements and choose an existing
+workspace. The launcher binds only to loopback; no hosted account or paid
+service is needed. Keyword and exact search work without an embedding model.
 
 ## Storage quickstart
 

@@ -7,10 +7,26 @@
   "scripts": {
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "links": "markdown-link-check README.md && markdown-link-check docs/STORAGE.md && markdown-link-check docs/SECURITY.md && markdown-link-check docs/EVALUATION.md && markdown-link-check docs/SEARCH.md && markdown-link-check docs/SEGMENTS.md && markdown-link-check docs/CHECKPOINTS.md && markdown-link-check docs/RETRIEVAL.md && markdown-link-check docs/SEMANTIC.md"
+    "links": "markdown-link-check README.md && markdown-link-check docs/STORAGE.md && markdown-link-check docs/SECURITY.md && markdown-link-check docs/EVALUATION.md && markdown-link-check docs/SEARCH.md && markdown-link-check docs/SEGMENTS.md && markdown-link-check docs/CHECKPOINTS.md && markdown-link-check docs/RETRIEVAL.md && markdown-link-check docs/SEMANTIC.md && markdown-link-check docs/API.md",
+    "build": "tsc -p frontend/tsconfig.json && vite build --config frontend/vite.config.ts",
+    "lint": "eslint frontend/src",
+    "typecheck": "tsc -p frontend/tsconfig.json"
   },
   "devDependencies": {
     "prettier": "3.9.10",
-    "markdown-link-check": "3.15.0"
-  }
+    "markdown-link-check": "3.15.0",
+    "vite": "8.3.5",
+    "typescript": "6.0.3",
+    "eslint": "10.14.0",
+    "@eslint/js": "10.0.1",
+    "typescript-eslint": "8.72.1",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "type": "module"
 }

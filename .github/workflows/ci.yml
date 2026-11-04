@@ -29,7 +29,14 @@ jobs:
             exit 1
           fi
       - run: npm run links
+      - run: npm run lint && npm run typecheck && npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web-ui
+          path: src/indexweave/web
+          retention-days: 7
   storage:
+    needs: quality
     strategy:
       fail-fast: false
       matrix:
@@ -50,6 +57,10 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - run: pip install -r requirements-dev.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: web-ui
+          path: src/indexweave/web
       - run: python -m build --wheel --no-isolation
       - run: pip install --force-reinstall --no-deps dist/*.whl
       - run: pip check
@@ -153,6 +164,7 @@ jobs:
           retention-days: 7
 
   semantic:
+    needs: quality
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
@@ -174,6 +186,10 @@ jobs:
           pip install torch==2.15.0 --index-url
           https://download.pytorch.org/whl/cpu
       - run: pip install -r requirements-semantic.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: web-ui
+          path: src/indexweave/web
       - run: python -m build --wheel --no-isolation
       - run: pip install --force-reinstall --no-deps dist/*.whl
       - run: pip check
@@ -185,6 +201,10 @@ jobs:
           artifacts/model-verified.json
       - name: Exercise actual offline inference and installed CLI
         run: python examples/semantic_demo.py artifacts/minilm
+      - run: pip install playwright==1.64.1
+      - run: python -m playwright install --with-deps chromium
+      - name: Exercise the browser with the real local model
+        run: python tests/browser_workflow.py --model artifacts/minilm
       - name: Prepare the frozen public corpus
         run: python scripts/prepare_retrieval_data.py artifacts/evaluation-data
       - name: Run the fixed retrieval comparison
@@ -197,6 +217,33 @@ jobs:
           path: |
             artifacts/retrieval-evaluation.json
             artifacts/model-verified.json
+            artifacts/browser/
             artifacts/minilm/MODEL-MANIFEST.json
             artifacts/evaluation-data/summary.json
+          retention-days: 7
+
+  browser:
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-dev.txt playwright==1.64.1
+      - uses: actions/download-artifact@v4
+        with:
+          name: web-ui
+          path: src/indexweave/web
+      - run: python -m build --wheel --no-isolation
+      - run: pip install --force-reinstall --no-deps dist/*.whl
+      - run: pip check
+      - run: python -m playwright install --with-deps chromium
+      - run: python tests/browser_workflow.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: indexweave-browser
+          path: artifacts/browser
           retention-days: 7

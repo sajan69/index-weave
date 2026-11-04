@@ -8,3 +8,5 @@ regex==2026.9.29
 setuptools==84.2.1
 sortedcontainers==2.4.0
 numpy==2.5.4
+-r requirements-api.txt
+httpx2==2.16.0
