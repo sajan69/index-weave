@@ -1,0 +1,311 @@
+{
+  "aggregates": {
+    "development": {
+      "hybrid": {
+        "all_support": 0.82,
+        "ndcg": 0.8089956748000876,
+        "recall": 0.905
+      },
+      "lexical": {
+        "all_support": 0.83,
+        "ndcg": 0.7998953898233022,
+        "recall": 0.915
+      },
+      "paired_hybrid_vs_lexical": {
+        "improved": 35,
+        "unchanged": 35,
+        "worsened": 30
+      },
+      "paired_semantic_vs_lexical": {
+        "improved": 33,
+        "unchanged": 22,
+        "worsened": 45
+      },
+      "semantic": {
+        "all_support": 0.71,
+        "ndcg": 0.7588361492452919,
+        "recall": 0.845
+      }
+    },
+    "holdout": {
+      "hybrid": {
+        "all_support": 0.87,
+        "ndcg": 0.8128039277379181,
+        "recall": 0.935
+      },
+      "lexical": {
+        "all_support": 0.8,
+        "ndcg": 0.7896569749646393,
+        "recall": 0.9
+      },
+      "paired_hybrid_vs_lexical": {
+        "improved": 45,
+        "unchanged": 32,
+        "worsened": 23
+      },
+      "paired_semantic_vs_lexical": {
+        "improved": 38,
+        "unchanged": 21,
+        "worsened": 41
+      },
+      "semantic": {
+        "all_support": 0.75,
+        "ndcg": 0.7786170728037074,
+        "recall": 0.87
+      }
+    }
+  },
+  "build_seconds": {
+    "embedding": 50.57293863299998,
+    "lexical": 0.9195693100000142
+  },
+  "completed": true,
+  "corpus": "6f9f7ace0909bd28179a253984f050dc56de92b3e2a4d7c7fee546e789c8ba56",
+  "data_attribution": {
+    "authors": "Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio, William W. Cohen, Ruslan Salakhutdinov and Christopher D. Manning (HotpotQA, 2018); Wikipedia contributors (source passages)",
+    "changes": "Deterministic 200-question subset; paragraphs joined from original sentences without inserted characters; title/text deduplication; supporting sentence annotations projected to binary document qrels.",
+    "license": "CC-BY-SA-4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "https://hotpotqa.github.io/"
+  },
+  "environment": {
+    "cpu_count": 4,
+    "machine": "x86_64",
+    "packages": {
+      "Jinja2": "3.1.6",
+      "MarkupSafe": "3.0.3",
+      "PyYAML": "6.0.3",
+      "Pygments": "2.21.0",
+      "annotated-doc": "0.0.5",
+      "anyio": "4.16.0",
+      "build": "1.6.1",
+      "click": "8.5.0",
+      "cloudpickle": "3.1.2",
+      "filelock": "4.2.4",
+      "fsspec": "2026.9.0",
+      "h11": "0.16.0",
+      "hf-xet": "1.8.0",
+      "httpcore2": "2.16.0",
+      "httpx2": "2.16.0",
+      "huggingface_hub": "2.4.0",
+      "hypothesis": "6.170.14",
+      "idna": "3.20",
+      "index-weave": "0.1.0",
+      "joblib": "1.6.0",
+      "markdown-it-py": "4.2.0",
+      "mdurl": "0.1.2",
+      "mpmath": "1.3.0",
+      "narwhals": "2.28.0",
+      "networkx": "3.7",
+      "numpy": "2.5.4",
+      "packaging": "26.3",
+      "pip": "26.2.2",
+      "portalocker": "4.4.2",
+      "pyarrow": "26.0.1",
+      "pyproject_hooks": "1.3.3",
+      "regex": "2026.9.29",
+      "rich": "15.0.0",
+      "ruff": "0.17.3",
+      "safetensors": "0.8.0",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "sentence-transformers": "6.2.0",
+      "setuptools": "84.2.1",
+      "shellingham": "1.5.4",
+      "sortedcontainers": "2.4.0",
+      "sympy": "1.14.0",
+      "threadpoolctl": "3.7.0",
+      "tokenizers": "0.23.3",
+      "torch": "2.15.0+cpu",
+      "tqdm": "4.70.1",
+      "transformers": "5.22.1",
+      "truststore": "0.10.5",
+      "typer": "0.27.3",
+      "typing_extensions": "4.16.0"
+    },
+    "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+    "python": "3.12.16"
+  },
+  "fictional_lifecycle": {
+    "completed": true,
+    "current_ids": ["journal"],
+    "initial_ids": ["journal", "draft"],
+    "installed_cli": true,
+    "model": {
+      "assets_sha256": "cdf609f5ee2eeb7204517d51b88b8079fb53624531a28ee74c524b58acf36caa",
+      "id": "sentence-transformers/all-MiniLM-L6-v2",
+      "numpy": "2.5.4",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "safetensors": "0.8.0",
+      "sentence-transformers": "6.2.0",
+      "tokenizers": "0.23.3",
+      "torch": "2.15.0+cpu",
+      "transformers": "5.22.1"
+    },
+    "network_blocked_smoke": true,
+    "old_view_preserved": true,
+    "query_source_unchanged": true,
+    "stale_refused": true
+  },
+  "holdout_cases": [
+    {
+      "comparison": "worsened",
+      "id": "5a8f541e5542992414482a53",
+      "method": "semantic",
+      "metrics": {
+        "hybrid": {
+          "all_support": false,
+          "ndcg": 0.2640681225725909,
+          "recall": 0.5
+        },
+        "lexical": {
+          "all_support": true,
+          "ndcg": 0.9197207891481876,
+          "recall": 1.0
+        },
+        "semantic": {
+          "all_support": false,
+          "ndcg": 0.0,
+          "recall": 0.0
+        }
+      },
+      "ndcg_delta": -0.9197207891481876,
+      "supporting_document_ranks": {
+        "hybrid": [18, 4],
+        "lexical": [3, 1],
+        "semantic": [89, 11]
+      }
+    },
+    {
+      "comparison": "improved",
+      "id": "5abea9a35542990832d3a07e",
+      "method": "semantic",
+      "metrics": {
+        "hybrid": {
+          "all_support": true,
+          "ndcg": 0.5249810332008933,
+          "recall": 1.0
+        },
+        "lexical": {
+          "all_support": true,
+          "ndcg": 0.39564672360221187,
+          "recall": 1.0
+        },
+        "semantic": {
+          "all_support": true,
+          "ndcg": 1.0,
+          "recall": 1.0
+        }
+      },
+      "ndcg_delta": 0.6043532763977881,
+      "supporting_document_ranks": {
+        "hybrid": [3, 6],
+        "lexical": [6, 10],
+        "semantic": [2, 1]
+      }
+    },
+    {
+      "comparison": "worsened",
+      "id": "5a8f541e5542992414482a53",
+      "method": "hybrid",
+      "metrics": {
+        "hybrid": {
+          "all_support": false,
+          "ndcg": 0.2640681225725909,
+          "recall": 0.5
+        },
+        "lexical": {
+          "all_support": true,
+          "ndcg": 0.9197207891481876,
+          "recall": 1.0
+        },
+        "semantic": {
+          "all_support": false,
+          "ndcg": 0.0,
+          "recall": 0.0
+        }
+      },
+      "ndcg_delta": -0.6556526665755966,
+      "supporting_document_ranks": {
+        "hybrid": [18, 4],
+        "lexical": [3, 1],
+        "semantic": [89, 11]
+      }
+    },
+    {
+      "comparison": "improved",
+      "id": "5abcf46255429959677d6b6b",
+      "method": "hybrid",
+      "metrics": {
+        "hybrid": {
+          "all_support": true,
+          "ndcg": 0.8175295903539445,
+          "recall": 1.0
+        },
+        "lexical": {
+          "all_support": false,
+          "ndcg": 0.2640681225725909,
+          "recall": 0.5
+        },
+        "semantic": {
+          "all_support": false,
+          "ndcg": 0.6131471927654584,
+          "recall": 0.5
+        }
+      },
+      "ndcg_delta": 0.5534614677813536,
+      "supporting_document_ranks": {
+        "hybrid": [1, 7],
+        "lexical": [4, 12],
+        "semantic": [1, 11]
+      }
+    }
+  ],
+  "index": {
+    "chunking": "wordpiece-192-stride160-title32-v1",
+    "content_sha256": "0bda9873680fe69562abcd26d4a3eff5f8153e97d575a85df2ef7e7838bed9aa",
+    "contract": "semantic-exact-v1",
+    "dimensions": 384,
+    "document_count": 1984,
+    "model": {
+      "assets_sha256": "cdf609f5ee2eeb7204517d51b88b8079fb53624531a28ee74c524b58acf36caa",
+      "id": "sentence-transformers/all-MiniLM-L6-v2",
+      "numpy": "2.5.4",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "safetensors": "0.8.0",
+      "sentence-transformers": "6.2.0",
+      "tokenizers": "0.23.3",
+      "torch": "2.15.0+cpu",
+      "transformers": "5.22.1"
+    },
+    "passage_count": 2273,
+    "snapshot_revision": 20
+  },
+  "model_asset_sha256": {
+    "id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "sha256": {
+      "1_Pooling/config.json": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23",
+      "README.md": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0",
+      "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+      "config_sentence_transformers.json": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3",
+      "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+      "modules.json": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf",
+      "sentence_bert_config.json": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7",
+      "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+      "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+      "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    }
+  },
+  "model_license": "Apache-2.0 (declared by publisher)",
+  "protocol": "hotpot-pool-v1",
+  "query_count": 200,
+  "source_evidence": {
+    "artifact": "retrieval-evaluation-cpu",
+    "commit": "9fc372ede0fb5049927069cc9b52d77fbb3e238b",
+    "job": 126318834493,
+    "run": "https://github.com/sajan69/index-weave/actions/runs/41751933815",
+    "scope": "Actual CPU inference and frozen public retrieval comparison; raw timings are single-run observations, not representative-scale performance results."
+  }
+}

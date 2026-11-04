@@ -418,3 +418,100 @@ This verifies acquisition, provenance, projection and metric mechanics. It is
 not a retrieval-quality, model-inference, latency or capacity result. No neural
 ranking scores, held-out errors, AI improvement, representative workload
 measurements or browser/API outcomes are reported here.
+
+## CPU semantic and hybrid retrieval
+
+[Source run 41751933815](https://github.com/sajan69/index-weave/actions/runs/41751933815)
+at commit `9fc372ede0fb5049927069cc9b52d77fbb3e238b` passed all seven jobs. The
+actual CPU inference/evaluation job was `126318834493`. The
+[recorded result](../examples/retrieval-evaluation.json) contains its model
+asset SHA-256 hashes, dependency/environment versions, aggregate outcomes,
+paired-query counts and selected improved/worsened cases. The
+[complete per-query metrics](../examples/retrieval-query-metrics.json) preserve
+all 200 question IDs, metrics and paired nDCG differences. They are measured
+outputs, not synthetic labels or manually chosen expected scores.
+
+The precommitted `hotpot-pool-v1` protocol retained every selected question: 100
+development and 100 holdout queries against 1,984 complete title/paragraph units
+from the public dataset, including distractors. Supporting-fact annotations
+supplied binary document qrels. The engine's actual source store held the corpus
+in 20 committed batches. Its live-content digest was
+`0bda9873680fe69562abcd26d4a3eff5f8153e97d575a85df2ef7e7838bed9aa`. The semantic
+index contained 2,273 windows and 384-dimensional normalized float32 vectors. No
+model, weight, fusion constant or query selection was tuned from these outcomes.
+
+| Split       | Method   | Recall@10 | nDCG@10 | All support at 10 |
+| ----------- | -------- | --------: | ------: | ----------------: |
+| Development | Lexical  |    0.9150 |  0.7999 |              0.83 |
+| Development | Semantic |    0.8450 |  0.7588 |              0.71 |
+| Development | Hybrid   |    0.9050 |  0.8090 |              0.82 |
+| Holdout     | Lexical  |    0.9000 |  0.7897 |              0.80 |
+| Holdout     | Semantic |    0.8700 |  0.7786 |              0.75 |
+| Holdout     | Hybrid   |    0.9350 |  0.8128 |              0.87 |
+
+The table rounds recorded full-precision values. All-support is the fraction of
+queries retrieving every annotated supporting paragraph. Semantic search alone
+scored below lexical search on both mean metrics in both splits. Hybrid had the
+highest holdout means, but its development recall and all-support rate were
+below lexical. These results support retaining the lexical option rather than
+assuming a neural or fused ranking always helps.
+
+For holdout nDCG, semantic improved 38 queries, worsened 41 and tied 21 against
+lexical; hybrid improved 45, worsened 23 and tied 32. Development counts were
+33/45/22 for semantic and 35/30/35 for hybrid. These are paired query counts,
+not percentages of users or production impact.
+
+Two inspectable holdout cases illustrate the tradeoff:
+
+- `5a8f541e5542992414482a53`: annotated paragraphs were at lexical ranks 1 and
+  3, semantic ranks 11 and 89, and hybrid ranks 4 and 18. Hybrid nDCG@10 fell
+  from 0.9197 to 0.2641 and lost one supporting paragraph from the top 10.
+- `5abcf46255429959677d6b6b`: lexical ranks 4 and 12 and semantic ranks 1 and 11
+  became hybrid ranks 1 and 7. Hybrid retrieved both supporting paragraphs and
+  increased nDCG@10 from 0.2641 to 0.8175.
+
+These cases are the most negative and positive holdout hybrid nDCG differences,
+with ID tie breaking, not a representative qualitative user study. The source
+artifact contains all document ranks and qrels. Independently recomputing binary
+Recall@10 and nDCG@10 from all 200 archived rankings reproduced every reported
+per-query metric within `1e-12`.
+
+### Runtime and reliability evidence
+
+The source job used Ubuntu x86-64, CPython 3.12.16, NumPy 2.5.4, PyTorch
+2.15.0+cpu, Sentence Transformers 6.2.0, Transformers 5.22.1, tokenizers 0.23.3
+and safetensors 0.8.0. It reported four logical CPUs; inference explicitly used
+two PyTorch threads and CI limited BLAS/OpenMP threads to two. The original
+safetensors file was 90,868,376 bytes and passed its pinned SHA-256 check. All
+eleven local assets were verified before inference. Asset hashes and installed
+package versions are retained in the recorded result.
+
+One observed run took 0.920 seconds to build the lexical index and 50.573
+seconds to encode/build the semantic index, excluding package installation,
+downloads and initial model loading. These are single shared-runner observations
+without repeats or controlled hardware isolation. Raw per-query seconds in the
+artifact include model query encoding, source identity checks, scoring and
+result assembly. They are not production latency targets, representative-scale
+benchmarks or evidence of a speed improvement. CLI semantic search rebuilds
+vectors per invocation, so its startup cost remains a practical limitation.
+
+The fictional actual-model example loaded and queried with socket connections
+blocked, refused a stale snapshot, preserved an old view, rebuilt after an
+update/delete and executed the installed semantic CLI without changing source
+log bytes. Its assertions concern consistency and offline mechanics, not human
+relevance. All 116 distinct test methods passed on Ubuntu Python 3.12, 3.13 and
+3.14 and macOS Python 3.12; the same methods also passed in the CPU inference
+job. The nine added methods use an explicitly fake encoder for scalar-cosine,
+chunking, immutability, vector/input guards, snapshot and fusion tests. The real
+encoder smoke and 200-query comparison ran only in the Linux CPU job.
+
+The raw evaluation, model manifest and source summary are retained in CI's
+`retrieval-evaluation-cpu` artifact for seven days. Reproduce them using
+[the setup and comparison commands](SEMANTIC.md). Public text and model weights
+are downloaded explicitly and are not committed here. English Wikipedia-based
+paragraph retrieval in a pooled distractor corpus is narrower than
+full-Wikipedia or end-user collection search. Incomplete relevance judgements
+and possible pretraining overlap limit interpretation. There is no model
+training, prospective/contamination-free evaluation, adoption claim,
+HTTP/browser result or representative-scale reliability claim in these
+measurements.

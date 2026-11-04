@@ -1,0 +1,1614 @@
+{
+  "data_attribution": {
+    "authors": "Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio, William W. Cohen, Ruslan Salakhutdinov and Christopher D. Manning (HotpotQA, 2018); Wikipedia contributors (source passages)",
+    "changes": "Deterministic 200-question subset; paragraphs joined from original sentences without inserted characters; title/text deduplication; supporting sentence annotations projected to binary document qrels.",
+    "license": "CC-BY-SA-4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "https://hotpotqa.github.io/"
+  },
+  "metric_columns": ["recall_at_10", "ndcg_at_10", "all_support_at_10"],
+  "ndcg_delta_columns": ["semantic_minus_lexical", "hybrid_minus_lexical"],
+  "rows": [
+    {
+      "hybrid": [1.0, 0.8772153153380493, true],
+      "id": "5adebc51554299728e26c799",
+      "lexical": [1.0, 0.3889580943680543, true],
+      "ndcg_deltas": [0.4087647951769723, 0.488257220969995],
+      "semantic": [1.0, 0.7977228895450266, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5a7365b155429901807db02a",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.1934264036172707, -0.08027921085181244],
+      "semantic": [1.0, 0.8065735963827293, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5a90997b5542995651fb51af",
+      "lexical": [1.0, 0.5714285040141098, true],
+      "ndcg_deltas": [0.3057868113239395, 0.2789164015206448],
+      "semantic": [1.0, 0.8772153153380493, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8772153153380493, true],
+      "id": "5abec9b25542997ec76fd366",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.4293582810446799, -0.1227846846619507],
+      "semantic": [1.0, 0.5706417189553201, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5a77baac5542992a6e59dfa2",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5abfd3ba5542994516f4550a",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.7977228895450266, true],
+      "id": "5ab3f24c5542992ade7c6eef",
+      "lexical": [1.0, 0.7903864795495061, true],
+      "ndcg_deltas": [0.01618711683322316, 0.007336409995520432],
+      "semantic": [1.0, 0.8065735963827293, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5ab89cc25542991b5579efc3",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.7977228895450266, true],
+      "id": "5ab3f6b9554299753aec5a03",
+      "lexical": [1.0, 0.8503449055347546, true],
+      "ndcg_deltas": [-0.23719771276929624, -0.052622015989728044],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ac3a364554299391541385d",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.1496550944652454, 0.0],
+      "semantic": [1.0, 0.8503449055347546, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.6509209298071326, true],
+      "id": "5a7736d85542994aec3b722b",
+      "lexical": [1.0, 0.8315546295836225, true],
+      "ndcg_deltas": [-0.2075041095797846, -0.1806336997764899],
+      "semantic": [1.0, 0.6240505200038379, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5a83870f554299123d8c2149",
+      "lexical": [1.0, 0.41443699955334395, true],
+      "ndcg_deltas": [0.19871019321211442, 0.19871019321211442],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8315546295836225, true],
+      "id": "5ab868e755429919ba4e22e3",
+      "lexical": [1.0, 0.8315546295836225, true],
+      "ndcg_deltas": [-0.2075041095797846, 0.0],
+      "semantic": [1.0, 0.6240505200038379, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.38685280723454163, false],
+      "id": "5ab56ed0554299637185c597",
+      "lexical": [1.0, 0.8503449055347546, true],
+      "ndcg_deltas": [-0.23719771276929624, -0.463492098300213],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5ab5ec2a5542992aa134a3e3",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.6131471927654584, -0.1496550944652454],
+      "semantic": [0.5, 0.38685280723454163, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5ae3dcc05542991a06ce9a33",
+      "lexical": [1.0, 0.8175295903539445, true],
+      "ndcg_deltas": [0.18247040964605554, 0.1021911987942431],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5ae56a3f5542992663a4f1f4",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5a875cd65542996e4f30879d",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.6509209298071326, true],
+      "id": "5a869e845542991e7718166f",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [-0.37594947999616224, -0.22629438553091674],
+      "semantic": [1.0, 0.5012658353418871, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.6934264036172708, true],
+      "id": "5a8133725542995ce29dcbdb",
+      "lexical": [1.0, 0.6240505200038379, true],
+      "ndcg_deltas": [0.2956702691443497, 0.06937588361343294],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.5912352048230277, true],
+      "id": "5adcf37e5542994ed6169c37",
+      "lexical": [1.0, 0.8315546295836225, true],
+      "ndcg_deltas": [-0.3065735963827292, -0.24031942476059476],
+      "semantic": [1.0, 0.5249810332008933, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.7977228895450266, true],
+      "id": "5a778d7855429967ab1051fa",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.38685280723454163, -0.20227711045497343],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a7647505542992d0ec06089",
+      "lexical": [1.0, 0.6934264036172708, true],
+      "ndcg_deltas": [0.22629438553091674, 0.3065735963827292],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.7903864795495061, true],
+      "id": "5abd332e5542993062266bdd",
+      "lexical": [1.0, 0.7903864795495061, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 0.7903864795495061, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.6934264036172708, true],
+      "id": "5a74167455429929fddd83dc",
+      "lexical": [1.0, 0.6509209298071326, true],
+      "ndcg_deltas": [0.34907907019286744, 0.04250547381013825],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.0, 0.0, false],
+      "id": "5adf62d05542992d7e9f932d",
+      "lexical": [1.0, 0.38162168437253385, true],
+      "ndcg_deltas": [-0.38162168437253385, -0.38162168437253385],
+      "semantic": [0.0, 0.0, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5ab965f25542996be20204c3",
+      "lexical": [1.0, 0.8315546295836225, true],
+      "ndcg_deltas": [0.04566068575442683, 0.08816615956456508],
+      "semantic": [1.0, 0.8772153153380493, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.38685280723454163, false],
+      "id": "5a85fb085542994775f606de",
+      "lexical": [0.5, 0.38685280723454163, false],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [0.5, 0.38685280723454163, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8772153153380493, true],
+      "id": "5adce36e5542990d50227d55",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [-0.026870409803294693, 0.0],
+      "semantic": [1.0, 0.8503449055347546, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5abe79c755429976d4830b2a",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.3065735963827292, 0.23719771276929624],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5adbf34955429947ff173862",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5adbfb6b55429947ff17388d",
+      "lexical": [1.0, 0.8315546295836225, true],
+      "ndcg_deltas": [-0.1806336997764899, 0.01879027595113214],
+      "semantic": [1.0, 0.6509209298071326, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8315546295836225, true],
+      "id": "5ac546975542993e66e8229a",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [-0.3065735963827292, -0.08816615956456508],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ab499a55542996a3a969f9f",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.08027921085181244, 0.0],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8065735963827293, true],
+      "id": "5a825f2155429954d2e2eb1b",
+      "lexical": [1.0, 0.7903864795495061, true],
+      "ndcg_deltas": [-0.17723928678404777, 0.01618711683322316],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5adbfb6855429944faac23e4",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.18247040964605554, -0.08027921085181244],
+      "semantic": [1.0, 0.8175295903539445, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.18457569677956817, false],
+      "id": "5a772c395542993735360207",
+      "lexical": [0.5, 0.3065735963827292, false],
+      "ndcg_deltas": [-0.3065735963827292, -0.12199789960316101],
+      "semantic": [0.0, 0.0, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ab729335542993667793f5a",
+      "lexical": [1.0, 0.8503449055347546, true],
+      "ndcg_deltas": [-0.2797031865794345, 0.1496550944652454],
+      "semantic": [1.0, 0.5706417189553201, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8772153153380493, true],
+      "id": "5a7b695f5542997c3ec97156",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.39473975594729427, -0.1227846846619507],
+      "semantic": [1.0, 0.6052602440527057, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8175295903539445, true],
+      "id": "5ab701395542991d3222373a",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [-0.3065735963827292, -0.1021911987942431],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5ae074aa5542993d6555eb54",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.38685280723454163, -0.1496550944652454],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8315546295836225, true],
+      "id": "5abadcb35542996606241647",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [-0.26406812257259094, -0.04566068575442683],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5ae4d9985542990ba0bbb175",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [-0.04250547381013825, 0.0],
+      "semantic": [1.0, 0.8772153153380493, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8175295903539445, true],
+      "id": "5a8cbce1554299653c1aa103",
+      "lexical": [1.0, 0.8315546295836225, true],
+      "ndcg_deltas": [-0.2184074368181641, -0.014025039229678016],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5aba510f5542994dbf0198d6",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [0.0, 0.08027921085181244],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5ae01fcf554299025d62a411",
+      "lexical": [0.5, 0.38685280723454163, false],
+      "ndcg_deltas": [0.10429648592775576, 0.22629438553091674],
+      "semantic": [1.0, 0.4911492931622974, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8772153153380493, true],
+      "id": "5ae136375542997b2ef7d12f",
+      "lexical": [1.0, 0.7977228895450266, true],
+      "ndcg_deltas": [0.20227711045497343, 0.07949242579302274],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ab1f13e554299449642c81c",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.08027921085181244, 0.0],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8315546295836225, true],
+      "id": "5ae6196d5542995703ce8afd",
+      "lexical": [1.0, 0.8315546295836225, true],
+      "ndcg_deltas": [0.01879027595113214, 0.0],
+      "semantic": [1.0, 0.8503449055347546, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a7d052255429909bec768fd",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [0.08027921085181244, 0.08027921085181244],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5ab3d2b7554299233954ffb8",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [-0.07949242579302274, -0.026870409803294693],
+      "semantic": [1.0, 0.7977228895450266, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5ade811e5542992fa25da7a0",
+      "lexical": [1.0, 0.8175295903539445, true],
+      "ndcg_deltas": [0.05968572498410485, 0.1021911987942431],
+      "semantic": [1.0, 0.8772153153380493, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.7903864795495061, true],
+      "id": "5a7652435542992d0ec060a5",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [-0.26406812257259094, -0.08682883578854317],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ab412da5542996a3a969f15",
+      "lexical": [1.0, 0.8503449055347546, true],
+      "ndcg_deltas": [0.1496550944652454, 0.1496550944652454],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a7c703055429935c91b51aa",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a7a47be5542994f819ef1b2",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ae32eca5542994393b9e640",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.38685280723454163, false],
+      "id": "5ae67fba5542996d980e7b9a",
+      "lexical": [0.5, 0.17723928678404774, false],
+      "ndcg_deltas": [0.4359079059814106, 0.2096135204504939],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8175295903539445, true],
+      "id": "5a90af865542990a9849369c",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.0, 0.2043823975884861],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5a7b8f5e554299294a54a9f6",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.516187116833223, -0.1496550944652454],
+      "semantic": [1.0, 0.48381288316677695, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5a8010685542992bc0c4a69a",
+      "lexical": [1.0, 0.8175295903539445, true],
+      "ndcg_deltas": [0.1021911987942431, 0.1021911987942431],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.38685280723454163, false],
+      "id": "5a90629855429916514e749e",
+      "lexical": [0.5, 0.2640681225725909, false],
+      "ndcg_deltas": [0.5263183569769152, 0.12278468466195075],
+      "semantic": [1.0, 0.7903864795495061, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.6934264036172708, true],
+      "id": "5a7c76275542990527d554b4",
+      "lexical": [1.0, 0.6934264036172708, true],
+      "ndcg_deltas": [0.22629438553091674, 0.0],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.38685280723454163, false],
+      "id": "5abf8ae85542990832d3a14b",
+      "lexical": [0.5, 0.21840743681816419, false],
+      "ndcg_deltas": [0.39473975594729416, 0.16844537041637744],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ae1b53b5542997283cd2255",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.34907907019286744, 0.0],
+      "semantic": [1.0, 0.6509209298071326, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a87868c5542996e4f308828",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [0.08027921085181244, 0.08027921085181244],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ae5ff635542996de7b71ace",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [0.1227846846619507, 0.1227846846619507],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.6934264036172708, true],
+      "id": "5a7ba83f5542995eb53be981",
+      "lexical": [1.0, 0.8503449055347546, true],
+      "ndcg_deltas": [-0.1569185019174838, -0.1569185019174838],
+      "semantic": [1.0, 0.6934264036172708, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5a770eb65542994aec3b71d4",
+      "lexical": [1.0, 0.8503449055347546, true],
+      "ndcg_deltas": [-0.04377130915202532, 0.06937588361343294],
+      "semantic": [1.0, 0.8065735963827293, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.7903864795495061, true],
+      "id": "5a8e0a005542995085b373a1",
+      "lexical": [1.0, 0.7903864795495061, true],
+      "ndcg_deltas": [-0.17723928678404777, 0.0],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.6934264036172708, true],
+      "id": "5a90d25655429916514e7585",
+      "lexical": [1.0, 0.6934264036172708, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 0.6934264036172708, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ae1e1e55542997f29b3c15e",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ac2cfab554299657fa29079",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8315546295836225, true],
+      "id": "5ab55e015542992aa134a2d3",
+      "lexical": [1.0, 0.8315546295836225, true],
+      "ndcg_deltas": [0.01879027595113214, 0.0],
+      "semantic": [1.0, 0.8503449055347546, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ab91799554299753720f6ea",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [0.1227846846619507, 0.1227846846619507],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5a7716ee55429937353601cc",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.16844537041637753, -0.08027921085181244],
+      "semantic": [1.0, 0.8315546295836225, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5a7da8065542995f4f4022a7",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.23719771276929624, 0.3065735963827292],
+      "semantic": [1.0, 0.8503449055347546, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5adf2d375542993344016c0d",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a85b0c85542994c784ddb40",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5a7b22f8554299042af8f6ff",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ae0413555429942ec259c61",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.08027921085181244, 0.0],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5add23e45542992ae4cec4a1",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8065735963827293, true],
+      "id": "5a778c215542995d831811ba",
+      "lexical": [1.0, 0.7977228895450266, true],
+      "ndcg_deltas": [0.008850706837702726, 0.008850706837702726],
+      "semantic": [1.0, 0.8065735963827293, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ab520dd5542996a3a96a02c",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [0.08027921085181244, 0.08027921085181244],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5a8781b65542993e715abf8f",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.38685280723454163, -0.08027921085181244],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5ab5ec0a5542997d4ad1f250",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.1496550944652454, -0.08027921085181244],
+      "semantic": [1.0, 0.8503449055347546, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.48247555939075504, true],
+      "id": "5a84c01e5542991dd0999dd6",
+      "lexical": [1.0, 0.37800210039683896, true],
+      "ndcg_deltas": [0.31542430322043186, 0.10447345899391608],
+      "semantic": [1.0, 0.6934264036172708, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5a7c35025542996dd594b8d7",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.2184074368181641, 0.0],
+      "semantic": [1.0, 0.8315546295836225, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5a8026a05542992e7d278df8",
+      "lexical": [0.5, 0.38685280723454163, false],
+      "ndcg_deltas": [0.22629438553091674, 0.22629438553091674],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5a7cdd1c554299683c1c63a8",
+      "lexical": [1.0, 0.7903864795495061, true],
+      "ndcg_deltas": [-0.17723928678404777, -0.17723928678404777],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.6240505200038379, true],
+      "id": "5a898872554299669944a540",
+      "lexical": [1.0, 0.6240505200038379, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 0.6240505200038379, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5a713a5a5542994082a3e6a9",
+      "lexical": [1.0, 0.8503449055347546, true],
+      "ndcg_deltas": [-0.052622015989728044, 0.0],
+      "semantic": [1.0, 0.7977228895450266, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8772153153380493, true],
+      "id": "5abc0ac455429959677d6a01",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [-0.04250547381013825, -0.04250547381013825],
+      "semantic": [1.0, 0.8772153153380493, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ae518ae5542993aec5ec13c",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [0.08027921085181244, 0.08027921085181244],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5a89fb525542993b751ca9d6",
+      "lexical": [1.0, 0.7977228895450266, true],
+      "ndcg_deltas": [0.12199789960316099, 0.12199789960316099],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5abb93275542993f40c73b3c",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [-0.1021911987942431, -0.06937588361343294],
+      "semantic": [1.0, 0.8175295903539445, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ac298f9554299657fa28fc9",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.38685280723454163, 0.0],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8772153153380493, true],
+      "id": "5ab414295542996a3a969f1d",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.20227711045497343, -0.1227846846619507],
+      "semantic": [1.0, 0.7977228895450266, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ab9cfe655429970cfb8ebaf",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 0.8315546295836225, true],
+      "id": "5ae237cf5542992decbdcc78",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [-0.07949242579302274, -0.04566068575442683],
+      "semantic": [1.0, 0.7977228895450266, true],
+      "split": "development"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ae504a855429908b63264df",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.18247040964605554, 0.0],
+      "semantic": [1.0, 0.8175295903539445, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a8a44c65542996c9b8d5e85",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.20961352045049386, 0.0],
+      "semantic": [1.0, 0.7903864795495061, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a7172105542994082a3e837",
+      "lexical": [1.0, 0.7977228895450266, true],
+      "ndcg_deltas": [0.019806700808917888, 0.20227711045497343],
+      "semantic": [1.0, 0.8175295903539445, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8175295903539445, true],
+      "id": "5a7b1a225542992d025e6770",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [-0.07064171895532001, -0.05968572498410485],
+      "semantic": [1.0, 0.8065735963827293, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [0.5, 0.38685280723454163, false],
+      "id": "5a84800f554299123d8c2276",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [-0.22629438553091674, -0.22629438553091674],
+      "semantic": [0.5, 0.38685280723454163, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [0.5, 0.2640681225725909, false],
+      "id": "5a8f541e5542992414482a53",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [-0.9197207891481876, -0.6556526665755966],
+      "semantic": [0.0, 0.0, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.6934264036172708, true],
+      "id": "5ade0bc55542997545bbbe30",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [-0.3334440061860239, -0.1837889117207785],
+      "semantic": [1.0, 0.5437713091520254, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.430624116386567, true],
+      "id": "5aba5dfd55429955dce3edf0",
+      "lexical": [1.0, 0.41183384043543503, true],
+      "ndcg_deltas": [0.04566068575442661, 0.018790275951131974],
+      "semantic": [1.0, 0.45749452618986164, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.48247555939075504, true],
+      "id": "5ade3e69554299728e26c68d",
+      "lexical": [1.0, 0.45560514958746035, true],
+      "ndcg_deltas": [0.11503656936785978, 0.026870409803294693],
+      "semantic": [1.0, 0.5706417189553201, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5a8481ba5542997175ce1ed4",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.26406812257259094, 0.0],
+      "semantic": [1.0, 0.8772153153380493, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8175295903539445, true],
+      "id": "5a7f725355429969796c1a55",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.38685280723454163, -0.18247040964605554],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5abf877c5542990832d3a147",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [0.08027921085181244, 0.08027921085181244],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8175295903539445, true],
+      "id": "5a7a3edd5542990783324ed9",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [-0.26406812257259094, -0.05968572498410485],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8315546295836225, true],
+      "id": "5abfa2255542993fe9a41e18",
+      "lexical": [1.0, 0.5437713091520254, true],
+      "ndcg_deltas": [0.3065735963827292, 0.28778332043159705],
+      "semantic": [1.0, 0.8503449055347546, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5ae3e2455542994393b9e78c",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [-0.1837889117207785, 0.04250547381013825],
+      "semantic": [1.0, 0.6934264036172708, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a7f3c8f55429930675136c9",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [0.08027921085181244, 0.08027921085181244],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5ac270e05542992f1f2b38c9",
+      "lexical": [1.0, 0.5437713091520254, true],
+      "ndcg_deltas": [0.45622869084797457, 0.37594947999616213],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5a79305755429907847277dd",
+      "lexical": [1.0, 0.8503449055347546, true],
+      "ndcg_deltas": [0.1496550944652454, 0.06937588361343294],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a8ee02955429917b4a5bdfa",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a764c0b55429976ec32bd89",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.6509209298071326, true],
+      "id": "5a75227955429929fddd8508",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [-0.32848558432515984, -0.268799859341055],
+      "semantic": [1.0, 0.5912352048230277, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5ac23ff0554299636651994d",
+      "lexical": [1.0, 0.8503449055347546, true],
+      "ndcg_deltas": [0.1496550944652454, 0.06937588361343294],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5a8ad8ed5542992d82986fa3",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.7903864795495061, true],
+      "id": "5a72fc865542991f9a20c5e9",
+      "lexical": [1.0, 0.7977228895450266, true],
+      "ndcg_deltas": [0.0, -0.007336409995520432],
+      "semantic": [1.0, 0.7977228895450266, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5a86296a55429960ec39b631",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.38685280723454163, 0.23719771276929624],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8772153153380493, true],
+      "id": "5a79395455429970f5fffe7d",
+      "lexical": [1.0, 0.8503449055347546, true],
+      "ndcg_deltas": [0.06937588361343294, 0.026870409803294693],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5a738093554299623ed4abbb",
+      "lexical": [1.0, 0.8175295903539445, true],
+      "ndcg_deltas": [0.18247040964605554, 0.032815315180810156],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ab5fcae554299110f2199ad",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a8ad59355429950cd6afba4",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a84c6df5542997b5ce3ff61",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [-0.3065735963827292, 0.08027921085181244],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.4415801103577823, true],
+      "id": "5a8dff3f5542995085b37370",
+      "lexical": [1.0, 0.7903864795495061, true],
+      "ndcg_deltas": [-0.5531887667802099, -0.34880636919172386],
+      "semantic": [0.5, 0.23719771276929622, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5a7aa5e75542992d025e66d9",
+      "lexical": [1.0, 0.8315546295836225, true],
+      "ndcg_deltas": [0.16844537041637753, 0.08816615956456508],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ac13f425542991316484a96",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8175295903539445, true],
+      "id": "5a7f6f4b5542994857a76740",
+      "lexical": [1.0, 0.8315546295836225, true],
+      "ndcg_deltas": [-0.014025039229678016, -0.014025039229678016],
+      "semantic": [1.0, 0.8175295903539445, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ab97b27554299131ca4233c",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.18247040964605554, 0.0],
+      "semantic": [1.0, 0.8175295903539445, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5adc0c2b55429947ff1738db",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [-0.04566068575442683, 0.04250547381013825],
+      "semantic": [1.0, 0.8315546295836225, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a8f0a01554299458435d539",
+      "lexical": [1.0, 0.8503449055347546, true],
+      "ndcg_deltas": [0.06937588361343294, 0.1496550944652454],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8175295903539445, true],
+      "id": "5abcf46255429959677d6b6b",
+      "lexical": [0.5, 0.2640681225725909, false],
+      "ndcg_deltas": [0.3490790701928675, 0.5534614677813536],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a90a14d5542990a98493672",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5a713f395542994082a3e6ea",
+      "lexical": [1.0, 0.8503449055347546, true],
+      "ndcg_deltas": [-0.23719771276929624, 0.0],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5add67555542992ae4cec54e",
+      "lexical": [1.0, 0.8503449055347546, true],
+      "ndcg_deltas": [0.1496550944652454, 0.06937588361343294],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5ac2716f5542992f1f2b38cb",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.3065735963827292, 0.23719771276929624],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8175295903539445, true],
+      "id": "5ab822ef55429916710eafff",
+      "lexical": [1.0, 0.7977228895450266, true],
+      "ndcg_deltas": [0.07949242579302274, 0.019806700808917888],
+      "semantic": [1.0, 0.8772153153380493, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a7c8ae855429935c91b5207",
+      "lexical": [1.0, 0.8065735963827293, true],
+      "ndcg_deltas": [-0.11314719276545848, 0.1934264036172707],
+      "semantic": [1.0, 0.6934264036172708, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.7977228895450266, true],
+      "id": "5a74106b55429979e288289e",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [-0.22629438553091674, 0.1845756967795682],
+      "semantic": [0.5, 0.38685280723454163, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a77388e55429966f1a36cb1",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [0.1227846846619507, 0.1227846846619507],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [0.5, 0.23719771276929622, false],
+      "id": "5a800ddd5542992097ad2fd0",
+      "lexical": [0.5, 0.3065735963827292, false],
+      "ndcg_deltas": [0.07504808798980467, -0.06937588361343297],
+      "semantic": [1.0, 0.38162168437253385, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5ab985eb554299131ca42360",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [0.1227846846619507, 0.04250547381013825],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5ae65e6a5542996d980e7b1d",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5adc398755429947ff173912",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5a7c43c65542990527d5547e",
+      "lexical": [1.0, 0.6934264036172708, true],
+      "ndcg_deltas": [0.3065735963827292, 0.22629438553091674],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8175295903539445, true],
+      "id": "5ab6f7415542991d322236f4",
+      "lexical": [1.0, 0.8175295903539445, true],
+      "ndcg_deltas": [-0.2043823975884861, 0.0],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5ae4ca6355429913cc204507",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.18247040964605554, -0.1496550944652454],
+      "semantic": [1.0, 0.8175295903539445, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.7977228895450266, true],
+      "id": "5ab51dbd5542996a3a96a023",
+      "lexical": [1.0, 0.5109559939712153, true],
+      "ndcg_deltas": [0.2867668955738113, 0.2867668955738113],
+      "semantic": [1.0, 0.7977228895450266, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5a7e23655542997cc2c47528",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5ae515bb55429913cc204584",
+      "lexical": [1.0, 0.8065735963827293, true],
+      "ndcg_deltas": [0.1934264036172707, 0.11314719276545826],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.6240505200038379, true],
+      "id": "5a75e16055429976ec32bc6a",
+      "lexical": [1.0, 0.5912352048230277, true],
+      "ndcg_deltas": [0.2591097007117269, 0.032815315180810156],
+      "semantic": [1.0, 0.8503449055347546, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.6509209298071326, true],
+      "id": "5ac02e31554299294b218f3f",
+      "lexical": [1.0, 0.6934264036172708, true],
+      "ndcg_deltas": [-0.1496550944652454, -0.04250547381013825],
+      "semantic": [1.0, 0.5437713091520254, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ab3c470554299233954ffa1",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ae1fd8a5542994d89d5b2ee",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.1227846846619507, 0.0],
+      "semantic": [1.0, 0.8772153153380493, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a8e494e5542995a26add4c8",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [0.5, 0.3065735963827292, false],
+      "id": "5ac4d314554299076e296e02",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [-0.41972078914818756, -0.3065735963827292],
+      "semantic": [0.5, 0.19342640361727081, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a7243915542990c210a4086",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.5912352048230277, true],
+      "id": "5ae2cbc9554299495565db36",
+      "lexical": [1.0, 0.6934264036172708, true],
+      "ndcg_deltas": [-0.08027921085181244, -0.1021911987942431],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.6934264036172708, true],
+      "id": "5a801e845542992097ad2fd9",
+      "lexical": [1.0, 0.6934264036172708, true],
+      "ndcg_deltas": [0.3065735963827292, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.3889580943680543, true],
+      "id": "5a8408a9554299123d8c21d3",
+      "lexical": [0.5, 0.38685280723454163, false],
+      "ndcg_deltas": [-0.12278468466195075, 0.0021052871335126566],
+      "semantic": [0.5, 0.2640681225725909, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ab48a7c5542991751b4d7ab",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8315546295836225, true],
+      "id": "5ab94d9a554299743d22eae3",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.38685280723454163, -0.16844537041637753],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5ac02c4a5542992a796decbd",
+      "lexical": [1.0, 0.8065735963827293, true],
+      "ndcg_deltas": [-0.19342640361727093, -0.19342640361727093],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5a76a8bb5542993569682c76",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a7f2d3e5542993067513675",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.6240505200038379, true],
+      "id": "5abb8e2d554299642a094aa4",
+      "lexical": [1.0, 0.6052602440527057, true],
+      "ndcg_deltas": [-0.03461852509738561, 0.01879027595113214],
+      "semantic": [1.0, 0.5706417189553201, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.6509209298071326, true],
+      "id": "5ae834e95542997ec272776a",
+      "lexical": [1.0, 0.6509209298071326, true],
+      "ndcg_deltas": [0.1806336997764899, 0.0],
+      "semantic": [1.0, 0.8315546295836225, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8315546295836225, true],
+      "id": "5a762f4755429976ec32bd44",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.23719771276929624, 0.2184074368181641],
+      "semantic": [1.0, 0.8503449055347546, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5ab2fccb5542991669774176",
+      "lexical": [1.0, 0.8065735963827293, true],
+      "ndcg_deltas": [0.11314719276545826, 0.04377130915202532],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5ab8ed305542991b5579f046",
+      "lexical": [1.0, 0.8065735963827293, true],
+      "ndcg_deltas": [-0.19342640361727093, -0.19342640361727093],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.6052602440527057, true],
+      "id": "5a90b7f355429916514e752d",
+      "lexical": [1.0, 0.6240505200038379, true],
+      "ndcg_deltas": [-0.1227846846619508, -0.01879027595113214],
+      "semantic": [1.0, 0.5012658353418871, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.5249810332008933, true],
+      "id": "5abea9a35542990832d3a07e",
+      "lexical": [1.0, 0.39564672360221187, true],
+      "ndcg_deltas": [0.6043532763977881, 0.12933430959868142],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.7977228895450266, true],
+      "id": "5ab516485542990594ba9cfc",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.0, 0.1845756967795682],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a7da0915542990b8f5039d4",
+      "lexical": [1.0, 0.8315546295836225, true],
+      "ndcg_deltas": [0.16844537041637753, 0.16844537041637753],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8503449055347546, true],
+      "id": "5addb7b65542997545bbbdba",
+      "lexical": [1.0, 0.8772153153380493, true],
+      "ndcg_deltas": [-0.026870409803294693, -0.026870409803294693],
+      "semantic": [1.0, 0.8503449055347546, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a7133565542994082a3e65c",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.08027921085181244, 0.0],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ae60426554299546bf83019",
+      "lexical": [1.0, 0.6509209298071326, true],
+      "ndcg_deltas": [0.34907907019286744, 0.34907907019286744],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5a85dfcc5542994775f60673",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.6131471927654584, -0.38685280723454163],
+      "semantic": [0.5, 0.38685280723454163, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.7977228895450266, true],
+      "id": "5ae4c7c65542990ba0bbb12b",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [-0.021911987942430655, 0.1845756967795682],
+      "semantic": [1.0, 0.5912352048230277, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [0.5, 0.6131471927654584, false],
+      "id": "5ae2ce505542996483e64a72",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [-0.22629438553091674, 0.0],
+      "semantic": [0.5, 0.38685280723454163, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.5437713091520254, true],
+      "id": "5a8d8eb5554299068b959d3a",
+      "lexical": [1.0, 0.5012658353418871, true],
+      "ndcg_deltas": [0.37594947999616224, 0.04250547381013836],
+      "semantic": [1.0, 0.8772153153380493, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.7903864795495061, true],
+      "id": "5ab6ba9d5542995eadef0083",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [-0.22629438553091674, 0.17723928678404777],
+      "semantic": [0.5, 0.38685280723454163, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8772153153380493, true],
+      "id": "5ac2ab9455429967731025f0",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [0.38685280723454163, 0.26406812257259094],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8772153153380493, true],
+      "id": "5a7b215f55429931da12c9e3",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.38685280723454163, -0.1227846846619507],
+      "semantic": [0.5, 0.6131471927654584, false],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.8772153153380493, true],
+      "id": "5add38355542990dbb2f7dd0",
+      "lexical": [1.0, 0.7977228895450266, true],
+      "ndcg_deltas": [0.12199789960316099, 0.07949242579302274],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5a722c2255429971e9dc932c",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ae7257a554299572ea54731",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.7903864795495061, true],
+      "id": "5abce2fc5542993a06baf994",
+      "lexical": [0.5, 0.6131471927654584, false],
+      "ndcg_deltas": [-0.04171868875134854, 0.17723928678404777],
+      "semantic": [1.0, 0.5714285040141098, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.6934264036172708, true],
+      "id": "5a7b2c9155429927d897bf51",
+      "lexical": [1.0, 0.6240505200038379, true],
+      "ndcg_deltas": [0.25316479533421143, 0.06937588361343294],
+      "semantic": [1.0, 0.8772153153380493, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5abfca465542993fe9a41e65",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [0.0, 0.0],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5ade66e1554299728e26c713",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.08027921085181244, 0.0],
+      "semantic": [1.0, 0.9197207891481876, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5ae4b5935542995ad6573e27",
+      "lexical": [1.0, 1.0, true],
+      "ndcg_deltas": [-0.3065735963827292, -0.08027921085181244],
+      "semantic": [1.0, 0.6934264036172708, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 1.0, true],
+      "id": "5abffda6554299012d1db55b",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [0.08027921085181244, 0.08027921085181244],
+      "semantic": [1.0, 1.0, true],
+      "split": "holdout"
+    },
+    {
+      "hybrid": [1.0, 0.9197207891481876, true],
+      "id": "5abf2e605542993fe9a41de4",
+      "lexical": [1.0, 0.9197207891481876, true],
+      "ndcg_deltas": [-0.06937588361343294, 0.0],
+      "semantic": [1.0, 0.8503449055347546, true],
+      "split": "holdout"
+    }
+  ],
+  "source": "retrieval-evaluation.json"
+}
