@@ -140,11 +140,25 @@ class BrowserWorkflows(unittest.TestCase):
             expect(page.get_by_label("Document text", exact=True)).to_have_value(
                 "Saved in another tab."
             )
+            pending = []
+            page.route("**/api/documents/guide", lambda route: pending.append(route))
+            page.get_by_role("button", name="Save document", exact=True).click()
+            expect(page.get_by_label("Title", exact=True)).to_be_disabled()
+            expect(
+                page.get_by_role("button", name="+ New document", exact=True)
+            ).to_be_disabled()
+            page.wait_for_timeout(100)
+            self.assertEqual(len(pending), 1)
+            pending[0].continue_()
+            expect(
+                page.get_by_text("Saved at collection revision 3.", exact=True)
+            ).to_be_visible()
+            page.unroute("**/api/documents/guide")
             page.get_by_role("button", name="Delete document", exact=True).click()
             expect(
                 page.get_by_text("Document deleted from the live collection.")
             ).to_be_visible()
-            expect(page.get_by_text("0 documents · revision 3")).to_be_visible()
+            expect(page.get_by_text("0 documents · revision 4")).to_be_visible()
             context.close()
 
     def test_import_inert_text_download_and_cross_origin_refusal(self):

@@ -85,7 +85,7 @@ function App() {
   }, [failure]);
   const discard = () => !dirty || window.confirm("Discard the unsaved draft?");
   const openDocument = async (id: string) => {
-    if (!discard()) return;
+    if (saving || !discard()) return;
     const epoch = ++editorEpoch.current;
     try {
       const record = await request<RecordData>(
@@ -114,7 +114,7 @@ function App() {
     setNotice("");
   };
   const newDocument = () => {
-    if (!discard() || !status) return;
+    if (saving || !discard() || !status) return;
     ++editorEpoch.current;
     setDraft(blank(status.revision));
     setDirty(false);
@@ -125,7 +125,8 @@ function App() {
   const importFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     event.target.value = "";
-    if (!file || !status || !discard()) return;
+    if (saving || !file || !status || !discard()) return;
+    const epoch = ++editorEpoch.current;
     try {
       if (file.size > 65536 || !/\.(txt|md)$/i.test(file.name))
         throw new Error("Choose a UTF-8 .txt or .md file of at most 64 KiB.");
@@ -133,6 +134,7 @@ function App() {
         fatal: true,
         ignoreBOM: true,
       }).decode(await file.arrayBuffer());
+      if (epoch !== editorEpoch.current) return;
       const name = file.name.replace(/\.(txt|md)$/i, "");
       const id =
         name
@@ -158,7 +160,7 @@ function App() {
   };
   const save = async (event: FormEvent) => {
     event.preventDefault();
-    if (!draft) return;
+    if (!draft || saving) return;
     setSaving(true);
     setError("");
     setNotice("");
@@ -195,6 +197,7 @@ function App() {
   };
   const remove = async () => {
     if (
+      saving ||
       !draft ||
       draft.isNew ||
       !window.confirm(
@@ -328,10 +331,17 @@ function App() {
           </p>
         </div>
         <div className="actions">
-          <button onClick={() => fileInput.current?.click()} disabled={!status}>
+          <button
+            onClick={() => fileInput.current?.click()}
+            disabled={!status || saving}
+          >
             Import text
           </button>
-          <button className="primary" onClick={newDocument} disabled={!status}>
+          <button
+            className="primary"
+            onClick={newDocument}
+            disabled={!status || saving}
+          >
             + New document
           </button>
           <input

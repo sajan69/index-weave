@@ -45,77 +45,79 @@ export function EditorPanel({
       </div>
       {draft ? (
         <form onSubmit={(event) => onSave(event)}>
-          <div className="editor-meta">
-            Based on collection revision {draft.expected_revision}
-          </div>
-          <label htmlFor="document-id">Document ID</label>
-          <input
-            id="document-id"
-            value={draft.id}
-            onChange={(event) => onChange("id", event.target.value)}
-            disabled={!draft.isNew}
-            maxLength={64}
-            pattern="[A-Za-z0-9][A-Za-z0-9._-]{0,63}"
-            required
-          />
-          <label htmlFor="title">Title</label>
-          <input
-            id="title"
-            value={draft.title}
-            onChange={(event) => onChange("title", event.target.value)}
-            maxLength={512}
-            required
-          />
-          <label htmlFor="tags">
-            Tags <span className="muted">(comma separated)</span>
-          </label>
-          <input
-            id="tags"
-            value={draft.tags}
-            onChange={(event) => onChange("tags", event.target.value)}
-            placeholder="notes, storage"
-          />
-          <label htmlFor="text">Document text</label>
-          <textarea
-            id="text"
-            value={draft.text}
-            onChange={(event) => onChange("text", event.target.value)}
-            maxLength={65536}
-            required
-            spellCheck={false}
-          />
-          <p className="small muted">
-            Plain UTF-8 text or Markdown, up to 64 KiB. Text is displayed
-            without executing HTML.
-          </p>
-          <div className="editor-actions">
-            <button className="primary" disabled={saving}>
-              {saving ? "Saving…" : "Save document"}
-            </button>
-            <button type="button" onClick={onDownload}>
-              Download text
-            </button>
-            {!draft.isNew && (
-              <button
-                className="danger"
-                type="button"
-                onClick={() => onDelete()}
-                disabled={saving}
-              >
-                Delete document
+          <fieldset className="editor-fields" disabled={saving}>
+            <div className="editor-meta">
+              Based on collection revision {draft.expected_revision}
+            </div>
+            <label htmlFor="document-id">Document ID</label>
+            <input
+              id="document-id"
+              value={draft.id}
+              onChange={(event) => onChange("id", event.target.value)}
+              disabled={!draft.isNew}
+              maxLength={64}
+              pattern="[A-Za-z0-9][A-Za-z0-9._-]{0,63}"
+              required
+            />
+            <label htmlFor="title">Title</label>
+            <input
+              id="title"
+              value={draft.title}
+              onChange={(event) => onChange("title", event.target.value)}
+              maxLength={512}
+              required
+            />
+            <label htmlFor="tags">
+              Tags <span className="muted">(comma separated)</span>
+            </label>
+            <input
+              id="tags"
+              value={draft.tags}
+              onChange={(event) => onChange("tags", event.target.value)}
+              placeholder="notes, storage"
+            />
+            <label htmlFor="text">Document text</label>
+            <textarea
+              id="text"
+              value={draft.text}
+              onChange={(event) => onChange("text", event.target.value)}
+              maxLength={65536}
+              required
+              spellCheck={false}
+            />
+            <p className="small muted">
+              Plain UTF-8 text or Markdown, up to 64 KiB. Text is displayed
+              without executing HTML.
+            </p>
+            <div className="editor-actions">
+              <button className="primary" disabled={saving}>
+                {saving ? "Saving…" : "Save document"}
               </button>
-            )}
-          </div>
-          {conflict &&
-            (draft.isNew ? (
-              <button type="button" onClick={onRebase}>
-                Use current revision for this new document
+              <button type="button" onClick={onDownload}>
+                Download text
               </button>
-            ) : (
-              <button type="button" onClick={() => onReload()}>
-                Reload saved version to review
-              </button>
-            ))}
+              {!draft.isNew && (
+                <button
+                  className="danger"
+                  type="button"
+                  onClick={() => onDelete()}
+                  disabled={saving}
+                >
+                  Delete document
+                </button>
+              )}
+            </div>
+            {conflict &&
+              (draft.isNew ? (
+                <button type="button" onClick={onRebase}>
+                  Use current revision for this new document
+                </button>
+              ) : (
+                <button type="button" onClick={() => onReload()}>
+                  Reload saved version to review
+                </button>
+              ))}
+          </fieldset>
         </form>
       ) : (
         <div className="empty editor-empty">

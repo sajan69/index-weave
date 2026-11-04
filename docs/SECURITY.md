@@ -1,12 +1,13 @@
 # Security and filesystem boundaries
 
-This package is a local POSIX storage engine. It does not expose a network
-listener, load a model, fetch document URLs or upload content. Its Python API is
-a trusted programming interface, not a sandbox for arbitrary objects or user
-code. Supported platforms need directory-relative opens, no-follow flags and
-functioning local file locks/synchronization. Windows and network filesystems
-are outside this version's support; OS APIs alone do not certify every POSIX
-filesystem.
+The storage engine uses local POSIX workspaces. The optional
+[local interface](API.md) serves one workspace on loopback and can load an
+explicitly configured verified local model. Search does not fetch document URLs
+or upload content. Its Python API is a trusted programming interface, not a
+sandbox for arbitrary objects or user code. Supported platforms need
+directory-relative opens, no-follow flags and functioning local file
+locks/synchronization. Windows and network filesystems are outside this
+version's support; OS APIs alone do not certify every POSIX filesystem.
 
 Use a directory owned by the current user under a trusted parent. The engine
 refuses public group/other permissions, final-component symlinks, unexpected

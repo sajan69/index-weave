@@ -498,3 +498,10 @@ footer {
     max-width: 85%;
   }
 }
+
+.editor-fields {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
