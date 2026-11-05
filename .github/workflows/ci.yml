@@ -166,7 +166,7 @@ jobs:
   semantic:
     needs: quality
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     env:
       HF_HUB_OFFLINE: "1"
       HF_HUB_DISABLE_TELEMETRY: "1"
@@ -211,6 +211,19 @@ jobs:
         run:
           python scripts/evaluate_retrieval.py artifacts/evaluation-data
           artifacts/minilm artifacts/retrieval-evaluation.json
+      - name: Measure five independent bounded-runtime repetitions
+        run:
+          python scripts/benchmark_runtime.py artifacts/evaluation-data
+          artifacts/minilm artifacts/bounded-runtime
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bounded-runtime-cpu
+          path: |
+            artifacts/bounded-runtime/workers.json
+            artifacts/bounded-runtime/summary.json
+            artifacts/bounded-runtime/*/worker.json
+          retention-days: 7
       - uses: actions/upload-artifact@v4
         with:
           name: retrieval-evaluation-cpu
