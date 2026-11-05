@@ -568,5 +568,5 @@ representative-scale memory/latency bounds.
 ## Repeated bounded runtime measurements
 
 The [five-process benchmark](BENCHMARK.md) records the complete public paragraph
-workload, raw observations, timing stages, index sizes and process memory limits.
-Its in-process timings do not measure HTTP or browser latency.
+workload, raw observations, timing stages, index sizes and process memory
+limits. Its in-process timings do not measure HTTP or browser latency.

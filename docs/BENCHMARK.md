@@ -1,10 +1,10 @@
 # Bounded runtime measurements
 
 [Source run 41945256799](https://github.com/sajan69/index-weave/actions/runs/41945256799)
-at commit `1e79629e1afd3218913a1449ca669f9b387353f6` passed all eight jobs.
-CPU job `126976201232` completed five independent sequential worker processes.
-The [raw record](../examples/runtime-record.json) preserves every worker,
-query observation, workload identity, environment and recomputable summary.
+at commit `1e79629e1afd3218913a1449ca669f9b387353f6` passed all eight jobs. CPU
+job `126976201232` completed five independent sequential worker processes. The
+[raw record](../examples/runtime-record.json) preserves every worker, query
+observation, workload identity, environment and recomputable summary.
 
 ## Workload and method
 
@@ -13,9 +13,9 @@ including distractors. Each worker imports them in batches of 100 into a fresh
 private source store, then measures replay, lexical construction, derived-index
 creation/loading, verified model loading and semantic construction separately.
 The model and dataset are explicitly acquired before measurement; see
-[semantic setup](SEMANTIC.md) and [dataset provenance](RETRIEVAL.md).
-Existing limits remain enforced, with no document exclusions or favourable
-replacement runs.
+[semantic setup](SEMANTIC.md) and [dataset provenance](RETRIEVAL.md). Existing
+limits remain enforced, with no document exclusions or favourable replacement
+runs.
 
 Each mode executes one untimed first-query warmup followed by all 100 frozen
 development queries in their original order. Text, semantic and complete hybrid
@@ -34,8 +34,8 @@ OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
 ```
 
 The destination must not exist. Failed phases are retained by name/error type;
-missing or failed repetitions prevent a successful summary. The coordinator
-does not retry or reset failed destinations. CI retains the raw JSON in the
+missing or failed repetitions prevent a successful summary. The coordinator does
+not retry or reset failed destinations. CI retains the raw JSON in the
 `bounded-runtime-cpu` artifact for seven days; source/index plaintext files are
 not uploaded by that artifact.
 
@@ -66,13 +66,14 @@ summaries, not a pooled or averaged percentile.
 | Hybrid   |                64.076–69.233 |             81.952–89.268 |
 
 The source log was 1,408,628 logical bytes; live canonical document bytes were
-1,356,700. The referenced segment was 16,365,839 bytes and CURRENT was 444 bytes;
-two lock files were empty. Numeric vector payload was 3,491,328 bytes for 2,273
-windows of 384 float32 dimensions. These counts exclude filesystem allocation,
-Python objects, model weights, tokenizer state and construction temporaries.
-Final process lifetime peak RSS ranged from 968,450,048 to 1,001,259,008 bytes.
-This includes the loaded model, all retained indexes and earlier temporary
-peaks; it is not isolated index memory or an exact capacity ceiling.
+1,356,700. The referenced segment was 16,365,839 bytes and CURRENT was 444
+bytes; two lock files were empty. Numeric vector payload was 3,491,328 bytes for
+2,273 windows of 384 float32 dimensions. These counts exclude filesystem
+allocation, Python objects, model weights, tokenizer state and construction
+temporaries. Final process lifetime peak RSS ranged from 968,450,048 to
+1,001,259,008 bytes. This includes the loaded model, all retained indexes and
+earlier temporary peaks; it is not isolated index memory or an exact capacity
+ceiling.
 
 The source runner reported Linux x86-64, CPython 3.12.16 and four logical CPUs.
 BLAS/OpenMP and PyTorch inference used two threads. Model revision, all asset
@@ -85,8 +86,8 @@ matched the recorded medians and p95 values.
 Fresh processes do not imply cold disk caches or isolated hardware. Short
 Wikipedia paragraphs and one shared runner do not represent every technical-note
 collection or document-size distribution. Results do not establish production
-latency guarantees, throughput, a speed improvement or HTTP service latency.
-The existing labelled relevance evaluation is separate from this runtime test.
+latency guarantees, throughput, a speed improvement or HTTP service latency. The
+existing labelled relevance evaluation is separate from this runtime test.
 
 Linux `ru_maxrss` is lifetime peak resident memory in KiB, converted to bytes;
 see [getrusage](https://man7.org/linux/man-pages/man2/getrusage.2.html).
